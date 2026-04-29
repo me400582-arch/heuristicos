@@ -9,3 +9,11 @@ Paquete en Python que implementa algoritmos heurísticos para:
 
 ```bash
 pip install .
+
+## Tests
+
+Para ejecutar las pruebas:
+
+```bash
+pip install .[test]
+pytest
