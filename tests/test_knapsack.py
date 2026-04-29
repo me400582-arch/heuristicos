@@ -9,3 +9,4 @@ def test_mochila_basico():
 
     assert valor > 0
     assert sum(pesos[i] for i in seleccion) <= capacidad
+si es 
