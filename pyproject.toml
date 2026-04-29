@@ -10,3 +10,6 @@ authors = [
     {name = "Tu Nombre"}
 ]
 dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest"]
