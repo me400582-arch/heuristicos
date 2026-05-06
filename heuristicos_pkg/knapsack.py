@@ -51,3 +51,81 @@ def mochila_backtracking(pesos, valores, capacidad):
 
     bt(0, [])
     return best
+
+import random
+import math
+
+
+def mochila_recocido_simulado(valores, pesos, capacidad,
+                               T0=1000,
+                               alpha=0.999,
+                               iteraciones=5000):
+    """
+    Algoritmo de recocido simulado para el problema de la mochila.
+    """
+
+    n = len(valores)
+
+    # solución inicial
+    X = [0] * n
+
+    peso_actual = 0
+    valor_actual = 0
+
+    mejor_X = X[:]
+    mejor_valor = 0
+
+    T = T0
+
+    for _ in range(iteraciones):
+
+        # elegir índice aleatorio
+        j = random.randint(0, n - 1)
+
+        Y = X[:]
+
+        # cambiar bit
+        Y[j] = 1 - Y[j]
+
+        nuevo_peso = peso_actual
+        nuevo_valor = valor_actual
+
+        # si agregamos objeto
+        if Y[j] == 1:
+            nuevo_peso += pesos[j]
+            nuevo_valor += valores[j]
+
+        # si quitamos objeto
+        else:
+            nuevo_peso -= pesos[j]
+            nuevo_valor -= valores[j]
+
+        # verificar factibilidad
+        if nuevo_peso <= capacidad:
+
+            delta = nuevo_valor - valor_actual
+
+            # mejora
+            if delta > 0:
+                X = Y
+                peso_actual = nuevo_peso
+                valor_actual = nuevo_valor
+
+            # aceptar peor solución con probabilidad
+            else:
+                prob = math.exp(delta / T)
+
+                if random.random() < prob:
+                    X = Y
+                    peso_actual = nuevo_peso
+                    valor_actual = nuevo_valor
+
+            # actualizar mejor solución
+            if valor_actual > mejor_valor:
+                mejor_valor = valor_actual
+                mejor_X = X[:]
+
+        # enfriamiento
+        T *= alpha
+
+    return mejor_X, mejor_valor
