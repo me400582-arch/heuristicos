@@ -1,31 +1,18 @@
 # Heurísticos
 
-Paquete en Python que implementa algoritmos heurísticos para:
+Paquete en Python que implementa algoritmos heurísticos y exactos para resolver el Problema de la Mochila 0/1.
 
-- Problema del Agente Viajero (TSP)
-- Problema de la Mochila
+## Algoritmos implementados
 
-## Instalación
+- Greedy
+- Backtracking
+- Recocido Simulado
+
+---
+
+# Instalación
+
+Clonar el repositorio:
 
 ```bash
-pip install .
-
-## Tests
-
-Para ejecutar las pruebas:
-
-```bash
-pip install .[test]
-pytest
-
-## Uso
-
-### Mochila Greedy
-
-```python
-from heuristicos_pkg.knapsack import mochila_greedy
-
-valores = [60, 100, 120]
-pesos = [10, 20, 30]
-
-print(mochila_greedy(valores, pesos, 50))
+git clone https://github.com/TU-USUARIO/TU-REPOSITORIO.git
