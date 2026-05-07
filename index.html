@@ -1,88 +1,233 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Proyecto de Heurísticos</title>
-    <style>
-        body {
-            font-family: Arial;
-            margin: 40px;
-            background: #f5f7fa;
-            color: #222;
-        }
+<meta charset="UTF-8">
+<title>Heurísticos - Optimización Combinatoria</title>
 
-        .seccion {
-            background: white;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
-        }
+<style>
+    body{
+        margin:0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg,#0a0f1f,#111827,#1e3a8a);
+        color:white;
+    }
 
-        h1 {
-            color: #004080;
-        }
+    header{
+        text-align:center;
+        padding:60px 20px;
+        background: linear-gradient(90deg,#06b6d4,#2563eb,#7c3aed);
+        box-shadow:0 4px 20px rgba(0,0,0,0.4);
+    }
 
-        h2 {
-            color: #0059b3;
-        }
-    </style>
+    header h1{
+        font-size:3em;
+        margin:0;
+    }
+
+    header p{
+        font-size:1.2em;
+    }
+
+    .contenedor{
+        width:85%;
+        margin:auto;
+        padding:40px 0;
+    }
+
+    .card{
+        background: rgba(255,255,255,0.08);
+        border:1px solid rgba(255,255,255,0.15);
+        backdrop-filter: blur(10px);
+        border-radius:18px;
+        padding:25px;
+        margin-bottom:30px;
+        box-shadow:0 8px 25px rgba(0,0,0,0.35);
+    }
+
+    h2{
+        color:#38bdf8;
+        border-bottom:2px solid #38bdf8;
+        padding-bottom:8px;
+    }
+
+    h3{
+        color:#c084fc;
+    }
+
+    code{
+        display:block;
+        background:#111827;
+        padding:15px;
+        border-radius:10px;
+        overflow-x:auto;
+        color:#22d3ee;
+    }
+
+    ul li{
+        margin:8px 0;
+    }
+
+    table{
+        width:100%;
+        border-collapse:collapse;
+        margin-top:15px;
+    }
+
+    th,td{
+        padding:12px;
+        border:1px solid rgba(255,255,255,0.2);
+        text-align:center;
+    }
+
+    th{
+        background:#2563eb;
+    }
+
+    footer{
+        text-align:center;
+        padding:30px;
+        color:#cbd5e1;
+    }
+
+    .pendiente{
+        color:#facc15;
+        font-weight:bold;
+    }
+</style>
 </head>
+
 <body>
 
-    <h1>Proyecto Final - Algoritmos Heurísticos</h1>
+<header>
+    <h1>Proyecto de Heurísticos</h1>
+    <p>Optimización combinatoria aplicada a la Mochila 0/1 y al Agente Viajero</p>
+</header>
 
-    <p>
-        Implementación de algoritmos heurísticos para resolver problemas clásicos
-        de optimización combinatoria.
-    </p>
+<div class="contenedor">
 
-    <div class="seccion">
-        <h2>Problema de la Mochila 0/1</h2>
-        <p>
-            Este módulo implementa algoritmos para resolver el problema de la mochila 0/1,
-            donde cada objeto puede seleccionarse completamente o no seleccionarse.
-        </p>
+<div class="card">
+<h2>Descripción General</h2>
+<p>
+Este proyecto implementa algoritmos heurísticos y exactos en Python para resolver
+problemas clásicos de optimización combinatoria.
+</p>
+</div>
 
-        <h3>Algoritmos implementados</h3>
-        <ul>
-            <li>Heurística voraz</li>
-            <li>Recocido simulado</li>
-        </ul>
+<div class="card">
+<h2>Problema de la Mochila 0/1</h2>
 
-        <h3>Ejemplo</h3>
-        <pre>
-from heuristicos_pkg.knapsack import mochila_voraz
-        </pre>
-    </div>
+<p>
+El objetivo consiste en seleccionar objetos con peso y utilidad asociados,
+maximizando el valor total sin exceder la capacidad disponible.
+</p>
 
-    <div class="seccion">
-        <h2>Problema del Agente Viajero (TSP)</h2>
+<h3>Modelo Matemático</h3>
 
-        <p>
-            AQUÍ TU COMPAÑERO DEBE PEGAR SU PARTE
-        </p>
+<code>
+max Σ pᵢxᵢ
 
-        <h3>Algoritmos implementados</h3>
-        <ul>
-            <li>________________</li>
-            <li>________________</li>
-        </ul>
+sujeto a:
 
-        <h3>Ejemplo</h3>
-        <pre>
-_____________________________
-        </pre>
-    </div>
+Σ wᵢxᵢ ≤ M
 
-    <div class="seccion">
-        <h2>Integrantes</h2>
-        <ul>
-            <li>José Rodolfo de la Cruz Flores</li>
-            <li>________________</li>
-            <li>________________</li>
-        </ul>
-    </div>
+xᵢ ∈ {0,1}
+</code>
+
+<h3>Algoritmos Implementados</h3>
+<ul>
+<li>Greedy</li>
+<li>Backtracking</li>
+<li>Recocido Simulado</li>
+</ul>
+
+<h3>Complejidades</h3>
+<ul>
+<li>Greedy → O(n log n)</li>
+<li>Backtracking → O(2ⁿ)</li>
+<li>Recocido Simulado → Aproximado</li>
+</ul>
+
+<h3>Ejemplo de uso</h3>
+
+<code>
+from heuristicos_pkg.knapsack import mochila_greedy
+</code>
+
+<h3>Resultados</h3>
+
+<table>
+<tr>
+<th>Algoritmo</th>
+<th>Valor</th>
+<th>Tipo</th>
+</tr>
+<tr>
+<td>Greedy</td>
+<td>160</td>
+<td>Heurístico</td>
+</tr>
+<tr>
+<td>Backtracking</td>
+<td>220</td>
+<td>Exacto</td>
+</tr>
+<tr>
+<td>Recocido Simulado</td>
+<td>220</td>
+<td>Metaheurístico</td>
+</tr>
+</table>
+
+</div>
+
+<div class="card">
+<h2>Problema del Agente Viajero (TSP)</h2>
+
+<p class="pendiente">
+Marcela debe colocar aquí la explicación del TSP
+</p>
+
+<h3>Algoritmos</h3>
+<ul>
+<li>________________</li>
+<li>________________</li>
+</ul>
+
+<h3>Ejemplo</h3>
+<code>
+______________________
+</code>
+</div>
+
+<div class="card">
+<h2>Pruebas Unitarias</h2>
+
+<p>
+Se desarrollaron pruebas automatizadas para verificar:
+</p>
+
+<ul>
+<li>Factibilidad de soluciones</li>
+<li>Correctitud del backtracking</li>
+<li>Validez del recocido simulado</li>
+</ul>
+
+</div>
+
+<div class="card">
+<h2>Integrantes</h2>
+<ul>
+<li>José Rodolfo de la Cruz Flores</li>
+<li>Marcela Mendoza Roque</li>
+<li>Carlos Perusi Hernandez Hernandez</li>
+</ul>
+</div>
+
+</div>
+
+<footer>
+Curso de Algoritmos Heurísticos · 2026
+</footer>
 
 </body>
 </html>
