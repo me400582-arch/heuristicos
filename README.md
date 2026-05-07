@@ -193,7 +193,7 @@ Las pruebas verifican:
 
 ## Equipo de trabajo
 
-* José Rodolfo de la Cruz Flores
+* De la cruz Flores Jose Rodolfo
 * Marcela Mendoza Roque
 * Carlos Perusi Hernandez Hernandez
 
