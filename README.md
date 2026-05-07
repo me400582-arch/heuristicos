@@ -1,4 +1,5 @@
-# Heurísticos - Problema de la Mochila 0/1
+# Heurísticos 
+# Problema de la Mochila 0/1
 
 Paquete en Python que implementa algoritmos heurísticos y exactos para resolver el Problema de la Mochila 0/1.
 
@@ -18,33 +19,21 @@ Este proyecto implementa tres enfoques diferentes:
 
 # Algoritmos implementados
 
-## Greedy
+# Integrantes y módulos
 
-Selecciona objetos según la mejor relación valor/peso.
+Este proyecto fue desarrollado en equipo.
 
-- Rápido
-- No siempre óptimo
-- Complejidad aproximada: O(n log n)
+## Problema de la Mochila 0/1
 
----
+Implementación de algoritmos heurísticos y exactos para el problema de la mochila:
 
-## Backtracking
+- Greedy
+- Backtracking
+- Recocido Simulado
 
-Explora todas las posibles combinaciones de objetos.
+## Problema del Agente Viajero
 
-- Garantiza solución óptima
-- Complejidad exponencial O(2^n)
-
----
-
-## Recocido Simulado
-
-Metaheurística inspirada en el enfriamiento de metales.
-
-- Busca soluciones aproximadas
-- Evita óptimos locales
-- Usa aceptación probabilística
-
+(Esta sección será completada por el integrante encargado del módulo del agente viajero.)
 ---
 
 # Instalación
@@ -72,17 +61,20 @@ pip install .
 # Estructura del proyecto
 
 ```bash
-heuristicos_pkg/
+heuristicos/
 │
 ├── heuristicos_pkg/
-│   └── knapsack.py
+│   ├── __init__.py
+│   ├── knapsack.py
+│   └── viajero.py
 │
 ├── tests/
-│   └── test_knapsack.py
+│   ├── test_knapsack.py
+│   └── test_viajero.py
 │
 ├── README.md
 ├── pyproject.toml
-└── ejemplo.py
+└── .gitignore
 ```
 
 ---
