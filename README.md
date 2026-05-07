@@ -1,37 +1,59 @@
 # Heurísticos
-# Problema de la Mochila 0/1
 
-Paquete en Python que implementa algoritmos heurísticos y exactos para resolver el Problema de la Mochila 0/1.
+## Problemas de Optimización Combinatoria
 
----
+Paquete en Python que implementa algoritmos heurísticos y exactos para resolver problemas clásicos de optimización combinatoria:
 
-# Descripción
-
-El problema de la mochila consiste en seleccionar objetos con cierto peso y valor para maximizar la ganancia total sin exceder la capacidad máxima de la mochila.
-
-Este proyecto implementa distintos enfoques heurísticos y exactos para resolver problemas clásicos de optimización combinatoria.
+* Problema de la Mochila 0/1
+* Problema del Agente Viajero (TSP)
 
 ---
 
-# Integrantes y módulos
+## Descripción
 
-Este proyecto fue desarrollado en equipo.
+Este proyecto desarrolla una biblioteca en Python orientada a la resolución de problemas clásicos de optimización combinatoria mediante distintos enfoques algorítmicos.
+
+El objetivo principal es comparar algoritmos exactos y heurísticos, analizando su eficiencia computacional, complejidad y calidad de solución.
+
+Actualmente incluye implementaciones para:
+
+* Mochila 0/1
+* Agente Viajero
+
+---
 
 ## Problema de la Mochila 0/1
 
-Implementación de algoritmos heurísticos y exactos para el problema de la mochila:
+El problema de la mochila consiste en seleccionar objetos con peso y valor asociados para maximizar el beneficio total sin exceder una capacidad límite.
 
-- Greedy
-- Backtracking
-- Recocido Simulado
+Se denomina **0/1** porque cada objeto tiene únicamente dos posibles estados:
 
-## Problema del Agente Viajero
+* **0:** No se selecciona
+* **1:** Se selecciona completamente
+
+No es posible seleccionar fracciones de un objeto.
+
+---
+
+## Integrantes y módulos
+
+Este proyecto fue desarrollado en equipo.
+
+### Módulo Mochila 0/1
+
+Implementación de algoritmos heurísticos y exactos:
+
+* Greedy
+* Backtracking
+* Recocido Simulado
+
+### Módulo Agente Viajero
 
 (Esta sección será completada por el integrante encargado del módulo del agente viajero.)
 
 ---
 
-# Instalación
+## Instalación
 
 Clonar el repositorio:
 
@@ -53,7 +75,7 @@ pip install .
 
 ---
 
-# Estructura del proyecto
+## Estructura del proyecto
 
 ```bash
 heuristicos/
@@ -69,76 +91,114 @@ heuristicos/
 │
 ├── README.md
 ├── pyproject.toml
+├── index.html
 └── .gitignore
 ```
 
 ---
 
-# Algoritmos implementados
+## Algoritmos implementados
 
-## Greedy
+### Greedy
 
 Selecciona objetos utilizando la mejor relación valor/peso.
 
-Características:
+**Características:**
 
-- Algoritmo heurístico
-- Complejidad aproximada O(n log n)
-- Rápido pero no siempre óptimo
-
----
-
-## Backtracking
-
-Explora todas las combinaciones posibles de objetos.
-
-Características:
-
-- Algoritmo exacto
-- Garantiza solución óptima
-- Complejidad exponencial O(2^n)
+* Algoritmo heurístico
+* Complejidad aproximada `O(n log n)`
+* Rápido
+* No siempre garantiza solución óptima
 
 ---
 
-## Recocido Simulado
+### Backtracking
 
-Metaheurística inspirada en el proceso de enfriamiento de metales.
+Explora todas las combinaciones posibles.
 
-Características:
+**Características:**
 
-- Permite escapar de óptimos locales
-- Usa aceptación probabilística
-- Obtiene soluciones aproximadas eficientes
+* Algoritmo exacto
+* Garantiza solución óptima
+* Complejidad exponencial `O(2^n)`
 
 ---
 
-# Ejecutar pruebas
+### Recocido Simulado
 
-Ejecutar los tests utilizando pytest:
+Metaheurística inspirada en el enfriamiento de metales.
+
+**Características:**
+
+* Permite escapar de óptimos locales
+* Usa aceptación probabilística
+* Soluciones aproximadas eficientes
+
+---
+
+## Ejemplo de uso
+
+Puedes modificar libremente los parámetros del problema para probar distintas instancias.
+
+```python
+from heuristicos_pkg.knapsack import mochila_greedy
+
+valores = [60, 100, 120]
+pesos = [10, 20, 30]
+capacidad = 50
+
+seleccion, valor = mochila_greedy(valores, pesos, capacidad)
+
+print("Selección:", seleccion)
+print("Valor total:", valor)
+```
+
+También puedes agregar más objetos:
+
+```python
+valores = [60, 100, 120, 80, 200]
+pesos = [10, 20, 30, 15, 40]
+capacidad = 70
+```
+
+**Nota:**
+Las listas `valores` y `pesos` deben tener la misma longitud.
+
+---
+
+## Ejecutar pruebas
+
+Ejecutar las pruebas unitarias utilizando pytest:
 
 ```bash
 pytest
 ```
 
----
+Las pruebas verifican:
 
-# Tecnologías utilizadas
-
-- Python
-- Pytest
-- GitHub
-- LaTeX
+* Factibilidad de soluciones
+* Correctitud del algoritmo exacto
+* Consistencia del recocido simulado
 
 ---
 
-# Equipo de trabajo
+## Tecnologías utilizadas
 
-- De la Cruz Flores Jose Rodolfo
-- Mendoza Roque Marcela
-- Hernandez Cuellar Carlos Perusi
+* Python
+* Pytest
+* GitHub
+* LaTeX
 
 ---
 
-# Licencia
+## Equipo de trabajo
 
-Proyecto académico con fines educativos.
+* José Rodolfo de la Cruz Flores
+* Marcela Mendoza Roque
+* Carlos Perusi Hernandez Hernandez
+
+---
+
+## Licencia
+
+Proyecto académico desarrollado con fines educativos.
