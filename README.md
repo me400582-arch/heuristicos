@@ -1,4 +1,4 @@
-# Heurísticos 
+# Heurísticos
 # Problema de la Mochila 0/1
 
 Paquete en Python que implementa algoritmos heurísticos y exactos para resolver el Problema de la Mochila 0/1.
@@ -9,15 +9,9 @@ Paquete en Python que implementa algoritmos heurísticos y exactos para resolver
 
 El problema de la mochila consiste en seleccionar objetos con cierto peso y valor para maximizar la ganancia total sin exceder la capacidad máxima de la mochila.
 
-Este proyecto implementa tres enfoques diferentes:
-
-- Greedy
-- Backtracking
-- Recocido Simulado
+Este proyecto implementa distintos enfoques heurísticos y exactos para resolver problemas clásicos de optimización combinatoria.
 
 ---
-
-# Algoritmos implementados
 
 # Integrantes y módulos
 
@@ -34,6 +28,7 @@ Implementación de algoritmos heurísticos y exactos para el problema de la moch
 ## Problema del Agente Viajero
 
 (Esta sección será completada por el integrante encargado del módulo del agente viajero.)
+
 ---
 
 # Instalación
@@ -79,30 +74,47 @@ heuristicos/
 
 ---
 
-# Ejemplo de uso
+# Algoritmos implementados
 
-```python
-from heuristicos_pkg.knapsack import mochila_greedy
+## Greedy
 
-valores = [60, 100, 120]
-pesos = [10, 20, 30]
-capacidad = 50
+Selecciona objetos utilizando la mejor relación valor/peso.
 
-seleccion, valor = mochila_greedy(
-    valores,
-    pesos,
-    capacidad
-)
+Características:
 
-print("Objetos seleccionados:", seleccion)
-print("Valor total:", valor)
-```
+- Algoritmo heurístico
+- Complejidad aproximada O(n log n)
+- Rápido pero no siempre óptimo
+
+---
+
+## Backtracking
+
+Explora todas las combinaciones posibles de objetos.
+
+Características:
+
+- Algoritmo exacto
+- Garantiza solución óptima
+- Complejidad exponencial O(2^n)
+
+---
+
+## Recocido Simulado
+
+Metaheurística inspirada en el proceso de enfriamiento de metales.
+
+Características:
+
+- Permite escapar de óptimos locales
+- Usa aceptación probabilística
+- Obtiene soluciones aproximadas eficientes
 
 ---
 
 # Ejecutar pruebas
 
-Ejecutar los tests usando pytest:
+Ejecutar los tests utilizando pytest:
 
 ```bash
 pytest
@@ -116,6 +128,14 @@ pytest
 - Pytest
 - GitHub
 - LaTeX
+
+---
+
+# Equipo de trabajo
+
+- De la Cruz Flores Jose Rodolfo
+- Mendoza Roque Marcela
+- Hernandez Cuellar Carlos Perusi
 
 ---
 
