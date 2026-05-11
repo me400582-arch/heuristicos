@@ -35,11 +35,8 @@ No es posible seleccionar fracciones de un objeto.
 
 ---
 
-## Integrantes y módulos
-
-Este proyecto fue desarrollado en equipo.
-
-### Módulo Mochila 0/1
+### Módulo 
+Mochila 0/1
 
 Implementación de algoritmos heurísticos y exactos:
 
@@ -47,11 +44,21 @@ Implementación de algoritmos heurísticos y exactos:
 * Backtracking
 * Recocido Simulado
 
-### Módulo Agente Viajero
+### Agente Viajero
 
-(Esta sección será completada por el integrante encargado del módulo del agente viajero.)
+Un vendedor debe de visitar un conjunto de $n$ ciudades, partiendo de una ciudad inicial, visitando cada ciudad exactemente una vez, finalmente regresando a la ciudad de origen. El objetivo es minimizar la distancia total recorrida o el costo.
 
 ---
+
+
+### Módulo 
+
+* Generación Lexicográfica de Permutaciones (PERMLEXDESENRUTAR)
+* Búsqueda Local 2-OPT (ASCENSOEMPINADO2OPT)
+* Recocido Simulado para TSP (extensión propuesta)
+
+---
+
 
 ## Instalación
 
@@ -135,6 +142,33 @@ Metaheurística inspirada en el enfriamiento de metales.
 * Soluciones aproximadas eficientes
 
 ---
+### Generación Lexicográfica de Permutaciones (PERMLEXDESENRUTAR)
+Toma números enteros del 0 a n-1! y lo convierte en una sola permutación única de n elementos. Es decir cada número corresponde a una sola permutación y cada permutación corresponde a un solo número.
+
+**Caracteristicas:**
+* Algoritmo combinatorio.
+* Complejiad temporal O(n).
+* Garantiza una biyección completa.
+---
+
+### Búsqueda Local 2-OPT (ASCENSOEMPINADO2OPT)
+ Elimina cruces en una ruta mediante el intercambio sistemático de pares de aristas.
+
+**Caracteristicas:**
+* Busqueda local.
+* Complejidad Temporal O(k*n^3)
+* Garantiza un óptimo local respectoal operador 2-opt.
+  
+---
+### Recocido Simulado para TSP (extensión propuesta)
+
+Refina cada individuo de la población inicial, asegurando que todas las soluciones sean óptimos locales y mejorando la calidad general de la población.
+
+**Caracteristicas:**
+* Mejora garantizada en cada paso (monótono)
+* No escala bien para grandes instancias (n > 1000)
+* Intuitivo: elimina cruces no deseados en la ruta
+* Puede quedar atrapado en óptimos locales de baja calidad
 
 ## Ejemplo de uso
 
