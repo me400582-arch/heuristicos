@@ -181,12 +181,19 @@ Puedes modificar libremente valores, pesos y capacidad para probar nuevas instan
 <div class="card">
 <h2>Problema del Agente Viajero</h2>
 
-<p class="pendiente">
+<h2>Descripción General</h2>
+<p>
 Este problema pertenece a la clase de problemas NP, lo que significa que no se conoce un algoritmo que lo resuelva en tiempo polinomial para todas las instancias. Por esta razón, los enfoques prácticos recurren a métodos heurísticos y metaheurísticos que, 
 sin garantizar optimalidad, producen soluciones de buena calidad en tiempos aceptables. El Problema del Agente Viajero (TSP) es uno de los problemas de optimización combinatoria más estudiados en la investigación operativa y la ciencia de la computación.
 Dado un conjunto de ciudades y las distancias entre cada par de ellas,  el TSP busca encontrar la ruta más corta que visite cada ciudad exactamente una vez y regrese al punto de partida.
 </p>
 
+<h3>Modelo Matemático</h3>
+
+<code>
+C(x) = \sum_{k=1}^{n-1} d_{x_k x_{k+1}} + d_{x_n x_1} 
+</code>
+  
 <h3>Algoritmos</h3>
 <ul>
 <li>Generación Lexicográfica de Permutaciones (PERMLEXDESENRUTAR)</li>
