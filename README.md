@@ -53,9 +53,9 @@ Un vendedor debe de visitar un conjunto de $n$ ciudades, partiendo de una ciudad
 
 ### Módulo 
 
-* Generación Lexicográfica de Permutaciones (PERMLEXDESENRUTAR)
-* Búsqueda Local 2-OPT (ASCENSOEMPINADO2OPT)
-* Recocido Simulado para TSP (extensión propuesta)
+* Cruce Parcialmente Emparejado
+* Búsqueda Local 2-OPT 
+* Algorutmo Genético Completo para TSP 
 
 ---
 
@@ -142,12 +142,12 @@ Metaheurística inspirada en el enfriamiento de metales.
 * Soluciones aproximadas eficientes
 
 ---
-### Generación Lexicográfica de Permutaciones (PERMLEXDESENRUTAR)
-Toma números enteros del 0 a n-1! y lo convierte en una sola permutación única de n elementos. Es decir cada número corresponde a una sola permutación y cada permutación corresponde a un solo número.
+### Cruce Parcialmente Emparejado
+En este algoritmo busca perservar la validez de las permutaciones, manteniendo el orden relativo, es biyectivo volvieendo fácil de implemetar.
 
 **Caracteristicas:**
 * Algoritmo combinatorio.
-* Complejiad temporal O(n).
+* Complejiad  O(n^2).
 * Garantiza una biyección completa.
 ---
 
@@ -156,13 +156,13 @@ Toma números enteros del 0 a n-1! y lo convierte en una sola permutación únic
 
 **Caracteristicas:**
 * Busqueda local.
-* Complejidad Temporal O(k*n^3)
-* Garantiza un óptimo local respectoal operador 2-opt.
+* Complejidad Temporal O(n^2) y O(n^3)
+* n > 1000, puede ser muy lento 
   
 ---
-### Recocido Simulado para TSP (extensión propuesta)
-
-Refina cada individuo de la población inicial, asegurando que todas las soluciones sean óptimos locales y mejorando la calidad general de la población.
+### Algoritmo Gen´etico Completo para TSP:
+A través de operadores como el cruce (PMX) y la mutación, se generan nuevas rutas,
+manteniendo diversidad y evitando optimos locales.
 
 **Caracteristicas:**
 * Mejora garantizada en cada paso (monótono)
