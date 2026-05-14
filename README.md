@@ -55,7 +55,7 @@ Un vendedor debe de visitar un conjunto de $n$ ciudades, partiendo de una ciudad
 
 * Cruce Parcialmente Emparejado
 * Búsqueda Local 2-OPT 
-* Algorutmo Genético Completo para TSP 
+* Algoritmo Genético Completo para TSP 
 
 ---
 
@@ -151,7 +151,7 @@ En este algoritmo busca perservar la validez de las permutaciones, manteniendo e
 * Garantiza una biyección completa.
 ---
 
-### Búsqueda Local 2-OPT (ASCENSOEMPINADO2OPT)
+### Búsqueda Local 2-OPT 
  Elimina cruces en una ruta mediante el intercambio sistemático de pares de aristas.
 
 **Caracteristicas:**
@@ -160,7 +160,7 @@ En este algoritmo busca perservar la validez de las permutaciones, manteniendo e
 * n > 1000, puede ser muy lento 
   
 ---
-### Algoritmo Gen´etico Completo para TSP:
+### Algoritmo Genético Completo para TSP:
 A través de operadores como el cruce (PMX) y la mutación, se generan nuevas rutas,
 manteniendo diversidad y evitando optimos locales.
 
@@ -169,6 +169,8 @@ manteniendo diversidad y evitando optimos locales.
 * No escala bien para grandes instancias (n > 1000)
 * Intuitivo: elimina cruces no deseados en la ruta
 * Puede quedar atrapado en óptimos locales de baja calidad
+
+---
 
 ## Ejemplo de uso
 
