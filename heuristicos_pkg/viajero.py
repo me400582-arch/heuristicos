@@ -52,7 +52,6 @@ def ascenso_mj_empinado(X, M): #Toma X como la ruta y M como el costo
             hecho = False
 
     return X
---------------------------------------------------------------------------
 
 "Es un intercambio de rutas"
 
@@ -64,7 +63,7 @@ def intercambiar_ciudad(alpha, beta, j, k): # α y β son listas y j,k son indic
         gamma[i], delta[i] = delta[i], gamma[i] # Intercambiar γ_i y δ_i,
 
     return gamma, delta
-------------------------------------------------------------------------
+
 "Operación de recombinación completa para TSP (PMREC)"
 
 def num_aleato(a, b):
@@ -147,7 +146,7 @@ def tsp(A, B, M):
     D = ascenso_mas_empinado(D, M)
 
     return C, D
-----------------------------------------------------------------------
+
  def calcular_costo(ruta, matriz):
     total = 0
     n = len(ruta)
@@ -158,7 +157,7 @@ def tsp(A, B, M):
 print(f"Costo Padre 1: {calcular_costo(padre_1, M)}")
 print(f"Costo Hijo A: {calcular_costo(hijo_a, M)}")
 
--------------------------------------------------------------------------
+
 
 "Es un algoritmo genético clásico con mejora implícita en REC"
 
@@ -232,7 +231,7 @@ def algorit_genet(n_poblacion, c_max_ite, seleccionar_inicial, REC_operac_cruce,
         c += 1
 
     return X_mejor
------------------------------------------------------------------------
+
 
 def alet_numero(a, b): # Se busca un numero aletorio de entre a y b
     return random.randint(a, b) #( usando .randint)
@@ -272,7 +271,7 @@ def generar_poblacion(tamano_poblacion, n):
 
     return P
 
----------------------------------------------------------------
+
 
 def alet_numero(a, b):
     """Genera un número aleatorio entre a y b"""
@@ -291,7 +290,6 @@ def perm_desen_lexi(r, n):
 
     return perm
 
-# ========== FUNCIONES 2-OPT ==========
 
 def G(X, i, j, M):
     """Calcula la ganancia de un movimiento 2-opt"""
@@ -335,7 +333,6 @@ def ascenso_m_empinado(X, M):
 
     return X
 
-# ========== ALGORITMO PRINCIPAL ==========
 
 def generar_poblacion(tamano_poblacion, n, M):
     """
@@ -362,8 +359,6 @@ def generar_poblacion(tamano_poblacion, n, M):
         P.append(ruta_mejorada)
 
     return P
-
-# ========== FUNCIONES DE COSTO ==========
 
 def calcular_costo(ruta, M):
     """Calcula el costo total de una ruta (circuito hamiltoniano)"""
