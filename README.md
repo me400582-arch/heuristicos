@@ -2,10 +2,7 @@
 
 ## Problemas de Optimización Combinatoria
 
-Paquete en Python que implementa algoritmos heurísticos y exactos para resolver problemas clásicos de optimización combinatoria:
-
-* Problema de la Mochila 0/1
-* Problema del Agente Viajero (TSP)
+Paquete en Python que implementa algoritmos heurísticos y exactos para resolver problemas clásicos de optimización combinatoria.
 
 ---
 
@@ -13,68 +10,76 @@ Paquete en Python que implementa algoritmos heurísticos y exactos para resolver
 
 Este proyecto desarrolla una biblioteca en Python orientada a la resolución de problemas clásicos de optimización combinatoria mediante distintos enfoques algorítmicos.
 
-El objetivo principal es comparar algoritmos exactos y heurísticos, analizando su eficiencia computacional, complejidad y calidad de solución.
+El objetivo principal es comparar algoritmos exactos y heurísticos, analizando:
 
-Actualmente incluye implementaciones para:
+- Eficiencia computacional
+- Complejidad algorítmica
+- Calidad de las soluciones obtenidas
+- Rendimiento en distintas instancias
 
-* Mochila 0/1
-* Agente Viajero
+Actualmente el proyecto incluye implementaciones para:
 
----
-
-## Problema de la Mochila 0/1
-
-El problema de la mochila consiste en seleccionar objetos con peso y valor asociados para maximizar el beneficio total sin exceder una capacidad límite.
-
-Se denomina **0/1** porque cada objeto tiene únicamente dos posibles estados:
-
-* **0:** No se selecciona
-* **1:** Se selecciona completamente
-
-No es posible seleccionar fracciones de un objeto.
+- Problema de la Mochila 0/1
+- Problema del Agente Viajero (TSP)
 
 ---
 
-### Módulo 
-Mochila 0/1
+# Problema de la Mochila 0/1
+
+El problema de la mochila consiste en seleccionar objetos con un peso y un valor asociados para maximizar el beneficio total sin exceder una capacidad límite.
+
+Se denomina **0/1** porque cada objeto únicamente puede:
+
+- No seleccionarse (`0`)
+- Seleccionarse completamente (`1`)
+
+No es posible seleccionar fracciones de objetos.
+
+---
+
+## Módulo Mochila 0/1
 
 Implementación de algoritmos heurísticos y exactos:
 
-* Greedy
-* Backtracking
-* Recocido Simulado
-
-### Agente Viajero
-
-Un vendedor debe de visitar un conjunto de $n$ ciudades, partiendo de una ciudad inicial, visitando cada ciudad exactemente una vez, finalmente regresando a la ciudad de origen. El objetivo es minimizar la distancia total recorrida o el costo.
+- Greedy
+- Backtracking
+- Recocido Simulado
 
 ---
 
+# Problema del Agente Viajero (TSP)
 
-### Módulo 
+El Problema del Agente Viajero (*Traveling Salesman Problem*) consiste en encontrar la ruta más corta posible que permita visitar un conjunto de ciudades exactamente una vez y regresar al punto de origen.
 
-* Cruce Parcialmente Emparejado
-* Búsqueda Local 2-OPT 
-* Algoritmo Genético Completo para TSP 
+El objetivo es minimizar la distancia total recorrida o el costo total del recorrido.
 
 ---
 
+## Módulo Agente Viajero
 
-## Instalación
+Implementación de algoritmos y operadores heurísticos:
 
-Clonar el repositorio:
+- Cruce Parcialmente Emparejado (PMX)
+- Búsqueda Local 2-OPT
+- Algoritmo Genético para TSP
+
+---
+
+# Instalación
+
+## Clonar el repositorio
 
 ```bash
 git clone https://github.com/me400582-arch/heuristicos
 ```
 
-Entrar al proyecto:
+## Entrar al proyecto
 
 ```bash
 cd heuristicos
 ```
 
-Instalar el paquete:
+## Instalar el paquete
 
 ```bash
 pip install .
@@ -82,7 +87,7 @@ pip install .
 
 ---
 
-## Estructura del proyecto
+# Estructura del Proyecto
 
 ```bash
 heuristicos/
@@ -104,77 +109,89 @@ heuristicos/
 
 ---
 
-## Algoritmos implementados
+# Algoritmos Implementados
 
-### Greedy
+## Greedy
 
 Selecciona objetos utilizando la mejor relación valor/peso.
 
-**Características:**
+### Características
 
-* Algoritmo heurístico
-* Complejidad aproximada `O(n log n)`
-* Rápido
-* No siempre garantiza solución óptima
-
----
-
-### Backtracking
-
-Explora todas las combinaciones posibles.
-
-**Características:**
-
-* Algoritmo exacto
-* Garantiza solución óptima
-* Complejidad exponencial `O(2^n)`
+- Algoritmo heurístico
+- Complejidad aproximada `O(n log n)`
+- Ejecución rápida
+- No garantiza solución óptima
 
 ---
 
-### Recocido Simulado
+## Backtracking
 
-Metaheurística inspirada en el enfriamiento de metales.
+Explora todas las combinaciones posibles de objetos.
 
-**Características:**
+### Características
 
-* Permite escapar de óptimos locales
-* Usa aceptación probabilística
-* Soluciones aproximadas eficientes
-
----
-### Cruce Parcialmente Emparejado
-En este algoritmo busca perservar la validez de las permutaciones, manteniendo el orden relativo, es biyectivo volvieendo fácil de implemetar.
-
-**Caracteristicas:**
-* Algoritmo combinatorio.
-* Complejiad  O(n^2).
-* Garantiza una biyección completa.
----
-
-### Búsqueda Local 2-OPT 
- Elimina cruces en una ruta mediante el intercambio sistemático de pares de aristas.
-
-**Caracteristicas:**
-* Busqueda local.
-* Complejidad Temporal O(n^2) y O(n^3)
-* n > 1000, puede ser muy lento 
-  
----
-### Algoritmo Genético Completo para TSP:
-A través de operadores como el cruce (PMX) y la mutación, se generan nuevas rutas,
-manteniendo diversidad y evitando optimos locales.
-
-**Caracteristicas:**
-* Mejora garantizada en cada paso (monótono)
-* No escala bien para grandes instancias (n > 1000)
-* Intuitivo: elimina cruces no deseados en la ruta
-* Puede quedar atrapado en óptimos locales de baja calidad
+- Algoritmo exacto
+- Garantiza la solución óptima
+- Complejidad exponencial `O(2^n)`
 
 ---
 
-## Ejemplo de uso
+## Recocido Simulado
 
-Puedes modificar libremente los parámetros del problema para probar distintas instancias.
+Metaheurística inspirada en el proceso físico de enfriamiento de metales.
+
+### Características
+
+- Permite escapar de óptimos locales
+- Usa aceptación probabilística
+- Produce soluciones aproximadas eficientes
+- Adecuado para problemas complejos
+
+---
+
+## Cruce Parcialmente Emparejado (PMX)
+
+Operador genético utilizado en problemas de permutaciones como el TSP.
+
+### Características
+
+- Preserva la validez de las permutaciones
+- Mantiene relaciones relativas entre ciudades
+- Garantiza una biyección completa
+- Complejidad aproximada `O(n²)`
+
+---
+
+## Búsqueda Local 2-OPT
+
+Heurística de optimización local que mejora rutas eliminando cruces innecesarios.
+
+### Características
+
+- Técnica de búsqueda local
+- Mejora progresivamente las rutas
+- Complejidad temporal aproximada entre `O(n²)` y `O(n³)`
+- Puede ser costoso para instancias grandes
+
+---
+
+## Algoritmo Genético para TSP
+
+Algoritmo evolutivo inspirado en los principios de selección natural.
+
+### Características
+
+- Usa operadores de cruce y mutación
+- Mantiene diversidad poblacional
+- Ayuda a evitar óptimos locales
+- Genera soluciones aproximadas eficientes
+- Adecuado para problemas de gran tamaño
+
+---
+
+# Ejemplo de Uso
+
+## Mochila 0/1 con Greedy
 
 ```python
 from heuristicos_pkg.knapsack import mochila_greedy
@@ -183,13 +200,19 @@ valores = [60, 100, 120]
 pesos = [10, 20, 30]
 capacidad = 50
 
-seleccion, valor = mochila_greedy(valores, pesos, capacidad)
+seleccion, valor = mochila_greedy(
+    valores,
+    pesos,
+    capacidad
+)
 
-print("Selección:", seleccion)
+print("Objetos seleccionados:", seleccion)
 print("Valor total:", valor)
 ```
 
-También puedes agregar más objetos:
+---
+
+## Otra instancia de ejemplo
 
 ```python
 valores = [60, 100, 120, 80, 200]
@@ -197,14 +220,15 @@ pesos = [10, 20, 30, 15, 40]
 capacidad = 70
 ```
 
-**Nota:**
+### Nota
+
 Las listas `valores` y `pesos` deben tener la misma longitud.
 
 ---
 
-## Ejecutar pruebas
+# Ejecución de Pruebas
 
-Ejecutar las pruebas unitarias utilizando pytest:
+Ejecutar las pruebas unitarias con:
 
 ```bash
 pytest
@@ -212,29 +236,44 @@ pytest
 
 Las pruebas verifican:
 
-* Factibilidad de soluciones
-* Correctitud del algoritmo exacto
-* Consistencia del recocido simulado
+- Factibilidad de soluciones
+- Correctitud de algoritmos exactos
+- Consistencia de heurísticas
+- Validez de rutas y permutaciones
 
 ---
 
-## Tecnologías utilizadas
+# Tecnologías Utilizadas
 
-* Python
-* Pytest
-* GitHub
-* LaTeX
-
----
-
-## Equipo de trabajo
-
-* De la cruz Flores Jose Rodolfo
-* Marcela Mendoza Roque
-* Carlos Perusi Hernandez Hernandez
+- Python
+- Pytest
+- GitHub
+- GitHub Pages
+- HTML
+- LaTeX
 
 ---
 
-## Licencia
+# Objetivos Académicos
+
+Este proyecto fue desarrollado con fines educativos para:
+
+- Analizar técnicas heurísticas y exactas
+- Comparar complejidad computacional
+- Aplicar optimización combinatoria
+- Implementar algoritmos metaheurísticos
+- Utilizar buenas prácticas de programación
+
+---
+
+# Equipo de Trabajo
+
+- Jose Rodolfo De la Cruz Flores
+- Marcela Mendoza Roque
+- Carlos Perusi Hernandez Hernandez
+
+---
+
+# Licencia
 
 Proyecto académico desarrollado con fines educativos.
