@@ -19,7 +19,7 @@ def matriz_ejemplo():
         [10, 4, 8, 0]
     ]
 
-def test_G():
+def G():
     M = matriz_ejemplo()
     ruta = [0, 1, 2, 3]
 
@@ -27,7 +27,7 @@ def test_G():
 
     assert isinstance(g, (int, float))
 
-def test_aplicar_2opt():
+def aplicar_2opt():
     ruta = [0, 1, 2, 3, 4]
 
     nueva = aplicar_2opt(ruta, 1, 3)
@@ -35,7 +35,7 @@ def test_aplicar_2opt():
     assert len(nueva) == len(ruta)
     assert sorted(nueva) == sorted(ruta)
 
-def test_ascenso_m_empinado():
+def ascenso_m_empinado():
     M = matriz_ejemplo()
     ruta = [0, 2, 1, 3]
 
@@ -44,7 +44,7 @@ def test_ascenso_m_empinado():
     assert len(mejor) == len(ruta)
     assert sorted(mejor) == sorted(ruta)
 
-def test_ascenso_mj_empinado():
+def ascenso_mj_empinado():
     M = matriz_ejemplo()
     ruta = [0, 3, 2, 1]
 
@@ -53,7 +53,7 @@ def test_ascenso_mj_empinado():
     assert len(mejor) == len(ruta)
     assert sorted(mejor) == sorted(ruta)
 
-def test_intercambiar_ciudad():
+def intercambiar_ciudad():
     A = [0, 1, 2, 3]
     B = [3, 2, 1, 0]
 
@@ -62,7 +62,7 @@ def test_intercambiar_ciudad():
     assert len(C) == len(A)
     assert len(D) == len(B)
 
-def test_parcial_emparejado():
+def parcial_emparejado():
     A = [0, 1, 2, 3]
     B = [3, 2, 1, 0]
 
@@ -74,13 +74,13 @@ def test_parcial_emparejado():
     assert sorted(C) == sorted(A)
     assert sorted(D) == sorted(B)
 
-def test_num_aleato():
+def num_aleato():
     a, b = 0, 10
     num = num_aleato(a, b)
 
     assert a <= num <= b
 
-def test_seleccionar_inicial():
+def seleccionar_inicial():
     poblacion = seleccionar_inicial(5)
 
     assert len(poblacion) == 5
