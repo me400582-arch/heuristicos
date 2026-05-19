@@ -154,10 +154,6 @@ def tsp(A, B, M):
         total += matriz[ruta[i]][ruta[(i + 1) % n]]
     return total
 
-print(f"Costo Padre 1: {calcular_costo(padre_1, M)}")
-print(f"Costo Hijo A: {calcular_costo(hijo_a, M)}")
-
-
 
 "Es un algoritmo genético clásico con mejora implícita en REC"
 
