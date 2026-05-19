@@ -1,104 +1,69 @@
-from heuristicos_pkg.tsp import vecino_mas_cercano
+from heuristicos_pkg.viajero import (
+    perm_desen_lexi,
+    aplicar_2opt,
+    calcular_costo,
+    generar_poblacion,
+    ascenso_m_empinado
+)
 
-import random
-import math
+def test_perm_desen_lexi():
+    perm = perm_desen_lexi(5, 4)
 
-def alet_numero(a, b):
-    """Genera un número aleatorio entre a y b"""
-    return random.randint(a, b)
+    assert len(perm) == 4
+    assert sorted(perm) == [0, 1, 2, 3]
 
-def perm_desen_lexi(r, n):
-    """Convierte un rango r en una permutación (unranking lexicográfico)"""
-    elementos = list(range(n))
-    perm = []
 
-    for i in range(n, 0, -1):
-        f = math.factorial(i - 1)
-        idx = r // f
-        r = r % f
-        perm.append(elementos.pop(idx))
+def test_aplicar_2opt():
+    ruta = [0, 1, 2, 3, 4]
 
-    return perm
+    nueva = aplicar_2opt(ruta, 1, 3)
 
-# ========== FUNCIONES 2-OPT ==========
+    assert nueva != ruta
+    assert sorted(nueva) == sorted(ruta)
 
-def G(X, i, j, M):
-    """Calcula la ganancia de un movimiento 2-opt"""
-    n = len(X)
-    a, b = X[i], X[(i + 1) % n]
-    c, d = X[j], X[(j + 1) % n]
-    return M[a][b] + M[c][d] - M[a][c] - M[b][d]
 
-def aplicar_2opt(X, i, j):
-    """Aplica un movimiento 2-opt invirtiendo el segmento"""
-    return X[:i+1] + X[i+1:j+1][::-1] + X[j+1:]
+def test_calcular_costo():
+    M = [
+        [0, 10, 15],
+        [10, 0, 20],
+        [15, 20, 0]
+    ]
 
-def ascenso_m_empinado(X, M):
-    """
-    Mejora una ruta usando ascenso más empinado con 2-opt
-    X: ruta (lista de enteros)
-    M: matriz de costos
-    """
-    n = len(X)
-    hecho = False
+    ruta = [0, 1, 2]
 
-    while not hecho:
-        hecho = True
-        g_i = 0
-        x, y = -1, -1
+    costo = calcular_costo(ruta, M)
 
-        for i in range(n - 1):
-            for j in range(i + 2, n):
-                if i == 0 and j == n - 1:
-                    continue
+    assert costo == 45
 
-                g_f = G(X, i, j, M)
 
-                if g_f > g_i:
-                    g_i = g_f
-                    x, y = i, j
+def test_generar_poblacion():
+    M = [
+        [0, 10, 15, 20],
+        [10, 0, 35, 25],
+        [15, 35, 0, 30],
+        [20, 25, 30, 0]
+    ]
 
-        if g_i > 0 and x != -1 and y != -1:
-            X = aplicar_2opt(X, x, y)
-            hecho = False
+    poblacion = generar_poblacion(5, 4, M)
 
-    return X
+    assert len(poblacion) == 5
 
-# ========== ALGORITMO PRINCIPAL ==========
+    for ruta in poblacion:
+        assert len(ruta) == 4
+        assert sorted(ruta) == [0, 1, 2, 3]
 
-def generar_poblacion(tamano_poblacion, n, M):
-    """
-    Genera una población inicial de rutas mejoradas con 2-opt
 
-    Parámetros:
-    - tamano_poblacion: número de individuos
-    - n: número de ciudades
-    - M: matriz de costos
-    """
-    P = []
-    max_rank = math.factorial(n)
+def test_ascenso_m_empinado():
+    M = [
+        [0, 10, 15, 20],
+        [10, 0, 35, 25],
+        [15, 35, 0, 30],
+        [20, 25, 30, 0]
+    ]
 
-    for i in range(tamano_poblacion):
-        # Generar rango aleatorio
-        r = alet_numero(0, max_rank - 1)
+    ruta = [0, 2, 1, 3]
 
-        # Convertir rango a permutación
-        ruta = perm_desen_lexi(r, n)
+    nueva = ascenso_m_empinado(ruta, M)
 
-        # Mejorar la ruta con 2-opt (¡esto es importante!)
-        ruta_mejorada = ascenso_m_empinado(ruta, M)
-
-        P.append(ruta_mejorada)
-
-    return P
-
-# ========== FUNCIONES DE COSTO ==========
-
-def calcular_costo(ruta, M):
-    """Calcula el costo total de una ruta (circuito hamiltoniano)"""
-    costo = 0
-    n = len(ruta)
-    for i in range(n - 1):
-        costo += M[ruta[i]][ruta[i+1]]
-    costo += M[ruta[-1]][ruta[0]]
-    return costo
+    assert len(nueva) == 4
+    assert sorted(nueva) == [0, 1, 2, 3]
