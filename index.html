@@ -206,7 +206,34 @@ C(x) = \sum_{k=1}^{n-1} d_{x_k x_{k+1}} + d_{x_n x_1}
 <li> Algoritmo Genético Completo para TSP →  (n > 1000) </li>
 </ul>
 
-  
+<h3>Ejemplo editable</h3>
+
+<code>
+n = 5  
+tamano_poblacion = 3  
+
+# Matriz de costos (puedes editarla)
+M = [
+    [0, 10, 15, 20, 25],
+    [10, 0, 35, 25, 30],
+    [15, 35, 0, 30, 20],
+    [20, 25, 30, 0, 15],
+    [25, 30, 20, 15, 0]
+]
+
+# USO DEL ALGORITMO
+
+from heuristicos_pkg.tsp import generar_poblacion, calcular_costo
+
+poblacion = generar_poblacion(tamano_poblacion, n, M)
+
+# Mostrar resultados
+for i, ruta in enumerate(poblacion):
+    costo = calcular_costo(ruta, M)
+    print(f"Ruta {i}: {ruta}")
+    print(f"Costo: {costo}")
+</code>
+ 
 </div>
 
 <div class="card">
