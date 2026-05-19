@@ -212,6 +212,57 @@ print("Valor total:", valor)
 
 ---
 
+## Mochila 0/1 con Recocido Simulado
+
+```python
+from heuristicos_pkg.knapsack import mochila_recocido_simulado
+
+valores = [60, 100, 120]
+pesos = [10, 20, 30]
+capacidad = 50
+
+solucion, valor = mochila_recocido_simulado(
+    valores,
+    pesos,
+    capacidad
+)
+
+print("Solución:", solucion)
+print("Valor obtenido:", valor)
+```
+
+---
+
+## Problema del Agente Viajero (TSP)
+
+```python
+from heuristicos_pkg.viajero import (
+    generar_poblacion,
+    calcular_costo
+)
+
+M = [
+    [0, 10, 15, 20],
+    [10, 0, 35, 25],
+    [15, 35, 0, 30],
+    [20, 25, 30, 0]
+]
+
+poblacion = generar_poblacion(
+    tamano_poblacion=5,
+    n=4,
+    M=M
+)
+
+for ruta in poblacion:
+    costo = calcular_costo(ruta, M)
+
+    print("Ruta:", ruta)
+    print("Costo:", costo)
+```
+
+---
+
 ## Otra instancia de ejemplo
 
 ```python
@@ -223,10 +274,6 @@ capacidad = 70
 ### Nota
 
 Las listas `valores` y `pesos` deben tener la misma longitud.
-
----
-
-# Ejecución de Pruebas
 
 Ejecutar las pruebas unitarias con:
 
