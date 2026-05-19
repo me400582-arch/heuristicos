@@ -18,8 +18,6 @@ def perm_desen_lexi(r, n):
 
     return perm
 
-# ========== FUNCIONES 2-OPT ==========
-
 def G(X, i, j, M):
     """Calcula la ganancia de un movimiento 2-opt"""
     n = len(X)
@@ -62,8 +60,6 @@ def ascenso_m_empinado(X, M):
 
     return X
 
-# ========== ALGORITMO PRINCIPAL ==========
-
 def generar_poblacion(tamano_poblacion, n, M):
     """
     Genera una población inicial de rutas mejoradas con 2-opt
@@ -89,8 +85,6 @@ def generar_poblacion(tamano_poblacion, n, M):
         P.append(ruta_mejorada)
 
     return P
-
-# ========== FUNCIONES DE COSTO ==========
 
 def calcular_costo(ruta, M):
     """Calcula el costo total de una ruta (circuito hamiltoniano)"""
