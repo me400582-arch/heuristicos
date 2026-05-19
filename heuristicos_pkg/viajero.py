@@ -1,130 +1,56 @@
 import random
-import math
-
-# =========================
-# 2-OPT
-# =========================
-
-def G(X, i, j, M):
-    n = len(X)
-    a, b = X[i], X[(i + 1) % n]
-    c, d = X[j], X[(j + 1) % n]
-    return (M[a][b] + M[c][d]) - (M[a][c] + M[b][d])
 
 
-def aplicar_2opt(X, i, j):
-    return X[:i+1] + X[i+1:j+1][::-1] + X[j+1:]
+def generar_ruta(n):
+    """Genera una permutación válida de ciudades"""
+    ruta = list(range(n))
+    random.shuffle(ruta)
+    return ruta
 
 
-def ascenso_m_empinado(X, M):
-    n = len(X)
+def generar_poblacion(tamano_poblacion, n, M=None):
+    """Genera una población de rutas válidas"""
+    poblacion = []
+    for _ in range(tamano_poblacion):
+        ruta = generar_ruta(n)
+        poblacion.append(ruta)
+    return poblacion
 
-    while True:
-        mejora = 0
-        mejor_i, mejor_j = -1, -1
-
-        for i in range(n - 1):
-            for j in range(i + 2, n):
-                if i == 0 and j == n - 1:
-                    continue
-
-                ganancia = G(X, i, j, M)
-
-                if ganancia > mejora:
-                    mejora = ganancia
-                    mejor_i, mejor_j = i, j
-
-        if mejora > 0:
-            X = aplicar_2opt(X, mejor_i, mejor_j)
-        else:
-            break
-
-    return X
-
-
-# =========================
-# CRUCE (PMX)
-# =========================
-
-def parcial_emparejado(A, B, inicio, fin):
-    n = len(A)
-    C = [None] * n
-    D = [None] * n
-
-    for i in range(inicio, fin + 1):
-        C[i] = A[i]
-        D[i] = B[i]
-
-    def rellenar(hijo, padre, seg1, seg2):
-        for i in range(n):
-            if hijo[i] is None:
-                val = padre[i]
-                while val in hijo:
-                    idx = seg1.index(val)
-                    val = seg2[idx]
-                hijo[i] = val
-
-    rellenar(C, B, A, B)
-    rellenar(D, A, B, A)
-
-    return C, D
-
-
-# =========================
-# GENÉTICO
-# =========================
 
 def calcular_costo(ruta, M):
-    return sum(M[ruta[i]][ruta[(i + 1) % len(ruta)]] for i in range(len(ruta)))
+    """Calcula el costo total de una ruta (ciclo cerrado)"""
+    costo = 0
+    n = len(ruta)
+
+    for i in range(n):
+        origen = ruta[i]
+        destino = ruta[(i + 1) % n]  # regresa al inicio
+        costo += M[origen][destino]
+
+    return costo
 
 
-def generar_poblacion(tamano, n, M):
-    P = []
-    for _ in range(tamano):
-        ruta = list(range(n))
-        random.shuffle(ruta)
-        ruta = ascenso_m_empinado(ruta, M)
-        P.append(ruta)
-    return P
+def dos_opt(ruta, M):
+    """Mejora una ruta usando 2-OPT"""
+    mejor = ruta[:]
+    mejor_costo = calcular_costo(mejor, M)
 
+    mejora = True
+    while mejora:
+        mejora = False
 
-def algoritmo_genetico(n_poblacion, generaciones, M,
-                      prob_cruce=0.9,
-                      prob_mutacion=0.1):
+        for i in range(1, len(ruta) - 1):
+            for j in range(i + 1, len(ruta)):
+                nueva_ruta = mejor[:]
+                nueva_ruta[i:j] = reversed(nueva_ruta[i:j])
 
-    n = len(M)
-    P = generar_poblacion(n_poblacion, n, M)
+                nuevo_costo = calcular_costo(nueva_ruta, M)
 
-    def seleccionar(P):
-        a, b = random.sample(P, 2)
-        return a if calcular_costo(a, M) < calcular_costo(b, M) else b
+                if nuevo_costo < mejor_costo:
+                    mejor = nueva_ruta
+                    mejor_costo = nuevo_costo
+                    mejora = True
 
-    mejor = min(P, key=lambda x: calcular_costo(x, M))
+        ruta = mejor
 
-    for _ in range(generaciones):
-        nuevos = []
-
-        while len(nuevos) < n_poblacion:
-            padre1 = seleccionar(P)
-            padre2 = seleccionar(P)
-
-            if random.random() < prob_cruce:
-                i = random.randint(0, n-2)
-                j = random.randint(i+1, n-1)
-                hijo1, hijo2 = parcial_emparejado(padre1, padre2, i, j)
-            else:
-                hijo1, hijo2 = padre1[:], padre2[:]
-
-            # mutación
-            if random.random() < prob_mutacion:
-                i, j = random.sample(range(n), 2)
-                hijo1[i], hijo1[j] = hijo1[j], hijo1[i]
-
-            nuevos.append(hijo1)
-
-        P = sorted(P + nuevos, key=lambda x: calcular_costo(x, M))[:n_poblacion]
-
-        if calcular_costo(P[0], M) < calcular_costo(mejor, M):
-            mejor = P[0]
-
-    return mejor
+    return mejor, mejor_costo
