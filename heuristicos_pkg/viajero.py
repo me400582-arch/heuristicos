@@ -1,5 +1,3 @@
-from heuristicos_pkg.tsp import vecino_mas_cercano
-
 import random
 import math
 
