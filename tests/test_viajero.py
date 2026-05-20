@@ -1,6 +1,5 @@
-%%writefile test_tsp.py
 import pytest
-from tsp import TSP
+from heuristicos_pkg.viajero import TSP
 
 
 def test_generar_matriz_aleatoria_simetrica():
