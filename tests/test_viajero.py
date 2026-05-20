@@ -1,3 +1,4 @@
+%%writefile test_tsp.py
 import pytest
 from tsp import TSP
 
@@ -6,15 +7,12 @@ def test_generar_matriz_aleatoria_simetrica():
     n = 5
     M = TSP.generar_matriz_aleatoria(n, simetrica=True)
 
-    # Tamaño correcto
     assert len(M) == n
     assert all(len(fila) == n for fila in M)
 
-    # Diagonal en cero
     for i in range(n):
         assert M[i][i] == 0
 
-    # Simetría
     for i in range(n):
         for j in range(n):
             assert M[i][j] == M[j][i]
@@ -24,15 +22,12 @@ def test_generar_matriz_aleatoria_asimetrica():
     n = 5
     M = TSP.generar_matriz_aleatoria(n, simetrica=False)
 
-    # Tamaño correcto
     assert len(M) == n
     assert all(len(fila) == n for fila in M)
 
-    # Diagonal en cero
     for i in range(n):
         assert M[i][i] == 0
 
-    # No necesariamente simétrica (al menos un par diferente)
     diferente = False
     for i in range(n):
         for j in range(n):
@@ -78,7 +73,6 @@ def test_calcular_costo():
     ruta = [0, 1, 2]
     costo = tsp.calcular_costo(ruta)
 
-    # 0->1 (10) + 1->2 (20) + 2->0 (15) = 45
     assert costo == 45
 
 
@@ -110,7 +104,7 @@ def test_dos_opt_no_empeora():
 
     tsp = TSP(M)
 
-    ruta = [0, 1, 2]  # ya óptima
+    ruta = [0, 1, 2]
     costo_inicial = tsp.calcular_costo(ruta)
 
     nueva_ruta, nuevo_costo = tsp.dos_opt(ruta)
