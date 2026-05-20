@@ -5,6 +5,29 @@ class TSP:
         """Inicializa el problema con la matriz de distancias"""
         self.M = matriz_costos
 
+    @staticmethod
+    def generar_matriz_aleatoria(n, min_val=1, max_val=100, simetrica=True):
+        """
+        Genera una matriz de costos aleatoria
+
+        Parámetros:
+        - n: número de ciudades
+        - min_val, max_val: rango de costos
+        - simetrica: si True genera un TSP simétrico
+        """
+        M = [[0]*n for _ in range(n)]
+
+        for i in range(n):
+            for j in range(n):
+                if i == j:
+                    M[i][j] = 0
+                elif simetrica and j < i:
+                    M[i][j] = M[j][i]  # espejo
+                else:
+                    M[i][j] = random.randint(min_val, max_val)
+
+        return M
+
     def generar_ruta(self, n):
         """Genera una permutación válida de ciudades"""
         ruta = list(range(n))
@@ -26,7 +49,7 @@ class TSP:
 
         for i in range(n):
             origen = ruta[i]
-            destino = ruta[(i + 1) % n]  # regresa al inicio
+            destino = ruta[(i + 1) % n]
             costo += self.M[origen][destino]
 
         return costo
@@ -55,3 +78,5 @@ class TSP:
             ruta = mejor
 
         return mejor, mejor_costo
+
+
