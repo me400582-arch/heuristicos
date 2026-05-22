@@ -2,7 +2,35 @@
 
 import math
 import random
+from dataclasses import dataclass
 from typing import Sequence
+
+@dataclass
+class InstanciaMochila:
+    """Representa una instancia del problema de la mochila 0/1.
+
+    Atributos:
+        valores: Lista de valores (beneficios) de cada objeto.
+        pesos: Lista de pesos de cada objeto.
+        capacidad: Capacidad máxima de la mochila.
+    """
+    valores: list[int]
+    pesos: list[int]
+    capacidad: int
+
+
+@dataclass
+class SolucionMochila:
+    """Representa una solución para el problema de la mochila.
+
+    Atributos:
+        seleccion: Lista de índices de los objetos seleccionados (o vector binario).
+        valor: Suma de los valores de los objetos seleccionados.
+        peso: Suma de los pesos de los objetos seleccionados.
+    """
+    seleccion: list[int]
+    valor: int
+    peso: int
 
 
 def _validar_instancia(
@@ -27,7 +55,7 @@ def generar_instancia_mochila(
     capacidad_ratio: float = 0.5,
 ) -> tuple[list[int], list[int], int]:
     """
-    Genera una instancia aleatoria del problema de la mochila.
+    Genera una instancia aleatoria del problema de la mochila 0/1.
 
     La capacidad se calcula como una fracción del peso total para
     que la instancia sea razonable y no trivial.
@@ -127,6 +155,7 @@ def mochila_backtracking(
         if peso_actual > capacidad:
             return
 
+        # Poda por cota superior: si la cota ya no mejora, no explorar esa rama
         if cota_superior(indice, peso_actual, valor_actual) <= mejor_valor:
             return
 
@@ -203,6 +232,7 @@ def mochila_recocido_simulado(
 
             valor_candidata, peso_candidata, es_factible = evaluar(candidata)
 
+            # Penalización si se excede la capacidad para no aceptar fácilmente soluciones inválidas
             valor_efectivo_actual = (
                 valor_actual
                 if peso_actual <= capacidad
@@ -230,7 +260,58 @@ def mochila_recocido_simulado(
     return mejor_solucion, mejor_valor
 
 
+# ---------------------------------------------------------------------------
+# Funciones adaptadas a dataclasses
+#
+# Estas funciones son envoltorios que operan sobre InstanciaMochila y
+# devuelven un SolucionMochila. No rompen la compatibilidad con las funciones
+# que trabajan con tuplas.
+
+def mochila_greedy_dataclass(instancia: InstanciaMochila) -> SolucionMochila:
+    """Resuelve la mochila 0/1 mediante un enfoque greedy sobre una instancia."""
+    seleccion, valor = mochila_greedy(
+        instancia.valores,
+        instancia.pesos,
+        instancia.capacidad
+    )
+    peso_total = sum(instancia.pesos[i] for i in seleccion)
+    return SolucionMochila(seleccion, valor, peso_total)
+
+
+def mochila_backtracking_dataclass(instancia: InstanciaMochila) -> SolucionMochila:
+    """Resuelve la mochila 0/1 mediante branch and bound sobre una instancia."""
+    valor, peso, seleccion = mochila_backtracking(
+        instancia.pesos,
+        instancia.valores,
+        instancia.capacidad
+    )
+    return SolucionMochila(seleccion, valor, peso)
+
+
+def mochila_recocido_dataclass(
+    instancia: InstanciaMochila,
+    *,
+    temperatura: float = 1000.0,
+    enfriamiento: float = 0.95,
+    iteraciones: int = 1000,
+) -> SolucionMochila:
+    """Resuelve la mochila 0/1 mediante recocido simulado sobre una instancia."""
+    seleccion, valor = mochila_recocido_simulado(
+        instancia.valores,
+        instancia.pesos,
+        instancia.capacidad,
+        temperatura=temperatura,
+        enfriamiento=enfriamiento,
+        iteraciones=iteraciones,
+    )
+    peso_total = sum(
+        instancia.pesos[i] for i in range(len(instancia.pesos)) if seleccion[i] == 1
+    )
+    return SolucionMochila(seleccion, valor, peso_total)
+
+
 if __name__ == "__main__":
+    # Ejemplo de uso rápido con instancias aleatorias
     valores, pesos, capacidad = generar_instancia_mochila(n_objetos=8)
 
     print("Valores:", valores)
