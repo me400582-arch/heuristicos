@@ -219,8 +219,7 @@ heuristicos-main/
 │   ├── test_knapsack.py
 │   └── test_viajero.py
 │
-├── examples/
-│   └── ejemplos_heuristicos.ipynb
+├── ejemplos_heuristicos.ipynb
 │
 ├── pyproject.toml
 ├── README.md
