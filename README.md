@@ -43,20 +43,21 @@ del profesor de utilizar dataclasses para estructurar las
 instancias.
 
 ## Estructura del proyecto
+
 heuristicos-main/
 ├── heuristicos_pkg/
-│ ├── init.py # Permite importar el paquete como módulo
-│ ├── knapsack.py # Implementa los algoritmos de la mochila
-│ └── viajero.py # Implementa los algoritmos del TSP
+│   ├── __init__.py              # Permite importar el paquete como módulo
+│   ├── knapsack.py              # Implementa los algoritmos de la mochila
+│   └── viajero.py               # Implementa los algoritmos del TSP
 │
 ├── tests/
-│ ├── test_knapsack.py # Pruebas unitarias para la mochila
-│ └── test_viajero.py # Pruebas unitarias para el TSP
+│   ├── test_knapsack.py         # Pruebas unitarias para la mochila
+│   └── test_viajero.py          # Pruebas unitarias para el TSP
 │
-├── Ejemplos_uso_Heuristicos (2).ipynb # Notebook con ejemplos de uso
-├── index.html # Página web de presentación del proyecto
-├── pyproject.toml # Archivo de configuración del paquete
-└── README.md # Este documento
+├── Ejemplos_uso_Heuristicos (2).ipynb  # Notebook con ejemplos de uso
+├── index.html                   # Página web de presentación del proyecto
+├── pyproject.toml               # Archivo de configuración del paquete
+└── README.md                    # Este documento
 
 ## Instalación local
 
