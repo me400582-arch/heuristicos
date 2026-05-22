@@ -7,8 +7,12 @@ name = "heuristicos-pkg"
 version = "0.1.0"
 description = "Algoritmos heurísticos: TSP y Knapsack"
 authors = [
-    {name = "Tu Nombre"}
+    {name = "Carlos Perusi Hernandez Cuellar", email = "persi220901@gmail.com"},
+    {name = "Jose Rodolfo De la Cruz Flores"},
+    {name = "Marcela Mendoza Roque"}
 ]
+requires-python = ">=3.8"
+readme = "README.md"
 dependencies = []
 
 [project.optional-dependencies]
