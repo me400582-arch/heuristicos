@@ -234,7 +234,7 @@ heuristicos-main/
 ## Clonar el repositorio
 
 ```bash
-git clone https://github.com/TU_USUARIO/TU_REPOSITORIO.git
+! git clone https://github.com/me400582-arch/heuristicos
 ```
 
 ---
@@ -242,7 +242,7 @@ git clone https://github.com/TU_USUARIO/TU_REPOSITORIO.git
 ## Entrar al proyecto
 
 ```bash
-cd TU_REPOSITORIO
+%cd heuristicos
 ```
 
 ---
@@ -250,7 +250,7 @@ cd TU_REPOSITORIO
 ## Instalar el paquete
 
 ```bash
-pip install .
+! pip install .
 ```
 
 ---
@@ -348,7 +348,7 @@ El proyecto incluye pruebas unitarias utilizando `pytest`.
 Para ejecutarlas:
 
 ```bash
-pytest
+! pytest
 ```
 
 Las pruebas verifican:
@@ -400,4 +400,3 @@ La libreta contiene:
 
 Este proyecto fue desarrollado con fines académicos y educativos.
 
-Licencia MIT.
