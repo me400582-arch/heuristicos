@@ -5,82 +5,92 @@
 <title>Heurísticos - Optimización Combinatoria</title>
 
 <style>
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:linear-gradient(135deg,#020617,#0f172a,#1e3a8a);
-color:white;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #020617, #0f172a, #1e3a8a);
+    color: white;
 }
 
-header{
-text-align:center;
-padding:60px 20px;
-background:linear-gradient(90deg,#06b6d4,#2563eb,#7c3aed);
-box-shadow:0 4px 20px rgba(0,0,0,0.4);
+header {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(90deg, #06b6d4, #2563eb, #7c3aed);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
 
-header h1{
-font-size:3em;
-margin:0;
+header h1 {
+    font-size: 3em;
+    margin: 0;
 }
 
-.contenedor{
-width:85%;
-margin:auto;
-padding:40px 0;
+header p {
+    font-size: 1.2em;
+    margin-top: 10px;
 }
 
-.card{
-background:rgba(255,255,255,0.08);
-border:1px solid rgba(255,255,255,0.15);
-border-radius:18px;
-padding:25px;
-margin-bottom:30px;
-box-shadow:0 8px 25px rgba(0,0,0,0.35);
+.contenedor {
+    width: 85%;
+    margin: auto;
+    padding: 40px 0;
 }
 
-h2{
-color:#38bdf8;
+.card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 18px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.35);
 }
 
-h3{
-color:#c084fc;
+h2 {
+    color: #38bdf8;
 }
 
-code{
-display:block;
-background:#111827;
-padding:15px;
-border-radius:10px;
-overflow-x:auto;
-color:#22d3ee;
+h3 {
+    color: #c084fc;
 }
 
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:15px;
+p {
+    line-height: 1.6;
 }
 
-th,td{
-padding:12px;
-border:1px solid rgba(255,255,255,0.2);
-text-align:center;
+li {
+    margin-bottom: 8px;
 }
 
-th{
-background:#2563eb;
+code {
+    display: block;
+    background: #111827;
+    padding: 15px;
+    border-radius: 10px;
+    overflow-x: auto;
+    color: #22d3ee;
+    white-space: pre-wrap;
+    line-height: 1.5;
 }
 
-.pendiente{
-color:#facc15;
-font-weight:bold;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
 }
 
-footer{
-text-align:center;
-padding:30px;
-color:#cbd5e1;
+th, td {
+    padding: 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+    text-align: center;
+}
+
+th {
+    background: #2563eb;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #cbd5e1;
 }
 </style>
 </head>
@@ -97,7 +107,11 @@ color:#cbd5e1;
 <div class="card">
 <h2>Descripción General</h2>
 <p>
-Implementación de algoritmos heurísticos y exactos en Python para resolver problemas clásicos de optimización combinatoria.
+Este proyecto presenta la implementación de algoritmos heurísticos, metaheurísticos y exactos en Python para resolver problemas clásicos de optimización combinatoria.
+</p>
+
+<p>
+Los problemas trabajados son el Problema de la Mochila 0/1 y el Problema del Agente Viajero. Además, el proyecto incluye pruebas unitarias, una libreta de Jupyter con ejemplos de uso y una estructura de paquete instalable.
 </p>
 </div>
 
@@ -105,7 +119,7 @@ Implementación de algoritmos heurísticos y exactos en Python para resolver pro
 <h2>Problema de la Mochila 0/1</h2>
 
 <p>
-Seleccionar objetos maximizando el valor total sin exceder la capacidad disponible.
+El Problema de la Mochila 0/1 consiste en seleccionar un subconjunto de objetos, cada uno con un peso y un valor, con el objetivo de maximizar el valor total sin exceder una capacidad máxima. Cada objeto solo puede tomarse una vez o no tomarse.
 </p>
 
 <h3>Modelo Matemático</h3>
@@ -113,66 +127,103 @@ Seleccionar objetos maximizando el valor total sin exceder la capacidad disponib
 <code>
 max Σ pᵢxᵢ
 
+sujeto a:
+
 Σ wᵢxᵢ ≤ M
 
 xᵢ ∈ {0,1}
 </code>
 
-<h3>Algoritmos</h3>
+<p>
+Donde pᵢ representa el valor del objeto, wᵢ representa su peso, M es la capacidad máxima de la mochila y xᵢ indica si el objeto se selecciona o no.
+</p>
+
+<h3>Algoritmos Implementados</h3>
 <ul>
-<li>Greedy</li>
-<li>Backtracking</li>
-<li>Recocido Simulado</li>
+<li>Greedy: selecciona objetos usando una estrategia basada en la relación valor/peso.</li>
+<li>Backtracking: explora combinaciones posibles para encontrar una solución óptima.</li>
+<li>Recocido Simulado: utiliza una metaheurística inspirada en procesos físicos de enfriamiento.</li>
 </ul>
 
 <h3>Complejidades</h3>
 <ul>
 <li>Greedy → O(n log n)</li>
 <li>Backtracking → O(2ⁿ)</li>
-<li>Recocido Simulado → Aproximado</li>
+<li>Recocido Simulado → depende del número de iteraciones configuradas</li>
 </ul>
 
-<h3>Ejemplo editable</h3>
+<h3>Ejemplo de Uso</h3>
 
 <code>
-valores = [60,100,120]
-pesos = [10,20,30]
+from heuristicos_pkg.knapsack import (
+    mochila_greedy,
+    mochila_backtracking,
+    mochila_recocido_simulado
+)
+
+valores = [60, 100, 120]
+pesos = [10, 20, 30]
 capacidad = 50
 
-from heuristicos_pkg.knapsack import mochila_greedy
+# Greedy
+solucion_greedy, valor_greedy = mochila_greedy(valores, pesos, capacidad)
 
-seleccion, valor = mochila_greedy(valores,pesos,capacidad)
+# Backtracking
+solucion_optima, valor_optimo, peso_optimo = mochila_backtracking(
+    valores,
+    pesos,
+    capacidad
+)
 
-print(seleccion)
-print(valor)
+# Recocido simulado
+solucion_rs, valor_rs = mochila_recocido_simulado(
+    valores,
+    pesos,
+    capacidad,
+    iteraciones=1000
+)
+
+peso_rs = sum(
+    pesos[i] for i in range(len(solucion_rs)) if solucion_rs[i] == 1
+)
+
+print("=== GREEDY ===")
+print("Solución:", solucion_greedy)
+print("Valor:", valor_greedy)
+
+print("\n=== BACKTRACKING ===")
+print("Solución:", solucion_optima)
+print("Valor:", valor_optimo)
+print("Peso:", peso_optimo)
+
+print("\n=== RECOCIDO SIMULADO ===")
+print("Solución:", solucion_rs)
+print("Valor:", valor_rs)
+print("Peso:", peso_rs)
 </code>
 
-<p>
-Puedes modificar libremente valores, pesos y capacidad para probar nuevas instancias.
-</p>
-
-<h3>Resultados</h3>
+<h3>Resultados Esperados</h3>
 
 <table>
 <tr>
 <th>Algoritmo</th>
-<th>Valor</th>
 <th>Tipo</th>
+<th>Descripción</th>
 </tr>
 <tr>
 <td>Greedy</td>
-<td>160</td>
 <td>Heurístico</td>
+<td>Rápido, pero no siempre garantiza la solución óptima.</td>
 </tr>
 <tr>
 <td>Backtracking</td>
-<td>220</td>
 <td>Exacto</td>
+<td>Puede encontrar la solución óptima, pero es costoso para instancias grandes.</td>
 </tr>
 <tr>
 <td>Recocido Simulado</td>
-<td>220</td>
 <td>Metaheurístico</td>
+<td>Busca buenas soluciones mediante exploración aleatoria controlada.</td>
 </tr>
 </table>
 
@@ -180,39 +231,47 @@ Puedes modificar libremente valores, pesos y capacidad para probar nuevas instan
 
 <div class="card">
 <h2>Problema del Agente Viajero</h2>
+
 <p>
-Este problema pertenece a la clase de problemas NP, lo que significa que no se conoce un algoritmo que lo resuelva en tiempo polinomial para todas las instancias. Por esta razón, los enfoques prácticos recurren a métodos heurísticos y metaheurísticos que, 
-sin garantizar optimalidad, producen soluciones de buena calidad en tiempos aceptables. El Problema del Agente Viajero (TSP) es uno de los problemas de optimización combinatoria más estudiados en la investigación operativa y la ciencia de la computación.
-Dado un conjunto de ciudades y las distancias entre cada par de ellas,  el TSP busca encontrar la ruta más corta que visite cada ciudad exactamente una vez y regrese al punto de partida.
+El Problema del Agente Viajero, también conocido como TSP por sus siglas en inglés, consiste en encontrar una ruta de costo mínimo que visite cada ciudad exactamente una vez y regrese al punto de partida.
+</p>
+
+<p>
+Este problema es importante porque aparece en aplicaciones como logística, transporte, planeación de rutas y optimización de recorridos. Para instancias grandes, encontrar la solución óptima puede ser muy costoso, por lo que se utilizan métodos heurísticos para obtener buenas soluciones en tiempos razonables.
 </p>
 
 <h3>Modelo Matemático</h3>
 
 <code>
-C(x) = \sum_{k=1}^{n-1} d_{x_k x_{k+1}} + d_{x_n x_1} 
+C(x) = Σ d(xₖ, xₖ₊₁) + d(xₙ, x₁)
 </code>
-  
-<h3>Algoritmos</h3>
+
+<p>
+Donde C(x) representa el costo total de la ruta y d(xₖ, xₖ₊₁) representa la distancia entre dos ciudades consecutivas.
+</p>
+
+<h3>Algoritmos Implementados</h3>
 <ul>
-<li>Generación aleatoria de rutas</li>
-<li>Cálculo de costo de rutas</li>
-<li>Búsqueda local 2-OPT</li>
+<li>Generación aleatoria de matrices de costos.</li>
+<li>Generación de rutas aleatorias.</li>
+<li>Cálculo del costo total de una ruta.</li>
+<li>Búsqueda local 2-OPT para mejorar rutas iniciales.</li>
 </ul>
 
 <h3>Complejidades</h3>
 <ul>
-<li> Cruce Parcialmente Emparejado  →  O(n^2) </li>
-<li> Búsqueda Local 2-OPT  → O(n^3) y O(n^2)  </li>
-<li> Algoritmo Genético Completo para TSP →  (n > 1000) </li>
+<li>Generación de ruta aleatoria → O(n)</li>
+<li>Generación de población de rutas → O(p · n), donde p es el tamaño de la población</li>
+<li>Cálculo de costo de una ruta → O(n)</li>
+<li>Búsqueda local 2-OPT → aproximadamente O(n³) en el peor caso</li>
 </ul>
 
-<h3>Ejemplo editable</h3>
+<h3>Ejemplo de Uso</h3>
 
 <code>
-n = 5  
-tamano_poblacion = 3  
+from heuristicos_pkg.viajero import TSP
 
-# Matriz de costos (puedes editarla)
+# Matriz de costos
 M = [
     [0, 10, 15, 20, 25],
     [10, 0, 35, 25, 30],
@@ -221,29 +280,121 @@ M = [
     [25, 30, 20, 15, 0]
 ]
 
-# USO DEL ALGORITMO
+# Crear instancia del problema
+tsp = TSP(M)
 
-from heuristicos_pkg.viajero import TSP
+# Generar una población de rutas aleatorias
+poblacion = tsp.generar_poblacion(tamano_poblacion=3)
 
-poblacion = tsp.generar_poblacion(tamano_poblacion)
-
-# Mostrar resultados
+# Mostrar rutas y costos
 for i, ruta in enumerate(poblacion):
-    costo = calcular_costo(ruta, M)
-    print(f"Ruta {i}: {ruta}")
+    costo = tsp.calcular_costo(ruta)
+    print(f"Ruta {i + 1}: {ruta}")
     print(f"Costo: {costo}")
+
+# Mejorar una ruta usando 2-OPT
+ruta_inicial = poblacion[0]
+ruta_mejorada, costo_mejorado = tsp.dos_opt(ruta_inicial)
+
+print("\n=== MEJORA CON 2-OPT ===")
+print("Ruta inicial:", ruta_inicial)
+print("Ruta mejorada:", ruta_mejorada)
+print("Costo mejorado:", costo_mejorado)
 </code>
- 
+
+<h3>Resultados Esperados</h3>
+
+<table>
+<tr>
+<th>Elemento</th>
+<th>Descripción</th>
+</tr>
+<tr>
+<td>Ruta inicial</td>
+<td>Ruta generada aleatoriamente.</td>
+</tr>
+<tr>
+<td>Costo inicial</td>
+<td>Costo total antes de aplicar mejora.</td>
+</tr>
+<tr>
+<td>Ruta mejorada</td>
+<td>Ruta obtenida después de aplicar 2-OPT.</td>
+</tr>
+<tr>
+<td>Costo mejorado</td>
+<td>Costo total después de la mejora local.</td>
+</tr>
+</table>
+
 </div>
 
 <div class="card">
 <h2>Pruebas Unitarias</h2>
 
+<p>
+El proyecto incluye pruebas unitarias para verificar el funcionamiento de los algoritmos implementados.
+</p>
+
 <ul>
-<li>Validación de factibilidad</li>
-<li>Correctitud del backtracking</li>
-<li>Consistencia del recocido simulado</li>
+<li>Pruebas para generación de instancias de mochila.</li>
+<li>Pruebas para validar soluciones factibles.</li>
+<li>Pruebas para el algoritmo greedy.</li>
+<li>Pruebas para backtracking.</li>
+<li>Pruebas para recocido simulado.</li>
+<li>Pruebas para generación de matrices del TSP.</li>
+<li>Pruebas para cálculo de costos.</li>
+<li>Pruebas para búsqueda local 2-OPT.</li>
 </ul>
+
+<h3>Comando para ejecutar pruebas</h3>
+
+<code>
+python -m pytest
+</code>
+
+</div>
+
+<div class="card">
+<h2>Notebook de Ejemplos</h2>
+
+<p>
+El repositorio incluye una libreta de Jupyter con ejemplos de uso de los algoritmos implementados. Esta libreta permite probar los métodos con diferentes instancias y observar sus resultados.
+</p>
+
+<h3>Ruta recomendada del notebook</h3>
+
+<code>
+examples/ejemplos_heuristicos.ipynb
+</code>
+
+<p>
+Para que esta ruta sea correcta, el archivo del notebook debe estar dentro de una carpeta llamada <strong>examples</strong>.
+</p>
+
+</div>
+
+<div class="card">
+<h2>Estructura del Proyecto</h2>
+
+<code>
+heuristicos-main/
+├── heuristicos_pkg/
+│   ├── __init__.py
+│   ├── knapsack.py
+│   └── viajero.py
+│
+├── tests/
+│   ├── test_knapsack.py
+│   └── test_viajero.py
+│
+├── examples/
+│   └── ejemplos_heuristicos.ipynb
+│
+├── index.html
+├── pyproject.toml
+└── README.md
+</code>
 
 </div>
 
@@ -253,7 +404,7 @@ for i, ruta in enumerate(poblacion):
 <ul>
 <li>José Rodolfo de la Cruz Flores</li>
 <li>Marcela Mendoza Roque</li>
-<li>Carlos Perusi Hernandez Hernandez</li>
+<li>Carlos Perusi Hernandez Cuellar</li>
 </ul>
 
 </div>
@@ -261,7 +412,8 @@ for i, ruta in enumerate(poblacion):
 </div>
 
 <footer>
-Curso de Algoritmos Heurísticos · 2026
+<p>Curso de Algoritmos Heurísticos · 2026</p>
+<p>Proyecto académico desarrollado con fines educativos.</p>
 </footer>
 
 </body>
