@@ -366,7 +366,7 @@ Las pruebas verifican:
 El proyecto incluye una libreta de Jupyter con ejemplos completos de uso:
 
 ```text
-examples/ejemplos_heuristicos.ipynb
+ejemplos_heuristicos.ipynb
 ```
 
 La libreta contiene:
