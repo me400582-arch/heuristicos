@@ -194,9 +194,9 @@ C(x) = \sum_{k=1}^{n-1} d_{x_k x_{k+1}} + d_{x_n x_1}
   
 <h3>Algoritmos</h3>
 <ul>
-<li> Cruce Parcialmente Emparejado </li>
-<li> Búsqueda Local 2-OPT </li>
-<li> Algoritmo Genético Completo para TSP</li>
+<li>Generación aleatoria de rutas</li>
+<li>Cálculo de costo de rutas</li>
+<li>Búsqueda local 2-OPT</li>
 </ul>
 
 <h3>Complejidades</h3>
@@ -225,7 +225,7 @@ M = [
 
 from heuristicos_pkg.viajero import TSP
 
-poblacion = generar_poblacion(tamano_poblacion, n, M)
+poblacion = tsp.generar_poblacion(tamano_poblacion)
 
 # Mostrar resultados
 for i, ruta in enumerate(poblacion):
