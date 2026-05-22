@@ -45,7 +45,7 @@ def dos_opt(
     ruta: Sequence[int],
     matriz_costos: Sequence[Sequence[int]],
 ) -> tuple[list[int], int]:
-    """Optimiza una ruta con 2-OPT y devuelve ruta y costo."""
+    """Optimiza una ruta con 2‑OPT y devuelve ruta y costo."""
     return TSP(matriz_costos).dos_opt(ruta)
 
 
@@ -97,7 +97,11 @@ class TSP:
         random.shuffle(ruta)
         return ruta
 
-    def generar_poblacion(self, tamano_poblacion: int, n: int | None = None) -> list[list[int]]:
+    def generar_poblacion(
+        self,
+        tamano_poblacion: int,
+        n: int | None = None
+    ) -> list[list[int]]:
         """Genera una población de rutas aleatorias."""
         if tamano_poblacion <= 0:
             raise ValueError("tamano_poblacion debe ser positivo")
@@ -117,11 +121,12 @@ class TSP:
         costo = 0
         for i in range(n - 1):
             costo += self.matriz_costos[ruta[i]][ruta[i + 1]]
+        # cerrar el ciclo
         costo += self.matriz_costos[ruta[-1]][ruta[0]]
         return costo
 
     def dos_opt(self, ruta: Sequence[int]) -> tuple[list[int], int]:
-        """Aplica 2-OPT hasta alcanzar un óptimo local."""
+        """Aplica 2‑OPT hasta alcanzar un óptimo local."""
         mejor = list(ruta)
         mejor_costo = self.calcular_costo(mejor)
 
