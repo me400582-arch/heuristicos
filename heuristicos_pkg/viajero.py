@@ -1,6 +1,21 @@
 from dataclasses import dataclass
 import random
+def generar_matriz_aleatoria(n, simetrica=True, minimo=1, maximo=100):
+    return TSP.generar_matriz_aleatoria(
+        n,
+        simetrica=simetrica,
+        minimo=minimo,
+        maximo=maximo,
+    )
 
+def generar_poblacion(tamano_poblacion, n):
+    return [random.sample(range(n), n) for _ in range(tamano_poblacion)]
+
+def calcular_costo(ruta, matriz_costos):
+    return TSP(matriz_costos).calcular_costo(ruta)
+
+def dos_opt(ruta, matriz_costos):
+    return TSP(matriz_costos).dos_opt(ruta)
 
 @dataclass
 class TSP:
@@ -95,3 +110,75 @@ class TSP:
                         mejora = True
 
         return mejor_ruta, mejor_costo
+@staticmethod
+def generar_matriz_aleatoria(
+    n,
+    simetrica=True,
+    minimo=1,
+    maximo=100
+):
+
+    if n<=0:
+        raise ValueError(
+            "n debe ser positivo"
+        )
+
+    matriz=[[0]*n for _ in range(n)]
+
+    for i in range(n):
+
+        for j in range(
+            i+1,
+            n
+        ):
+
+            costo=random.randint(
+                minimo,
+                maximo
+            )
+
+            matriz[i][j]=costo
+
+            if simetrica:
+
+                matriz[j][i]=costo
+
+            else:
+
+                matriz[j][i]=random.randint(
+                    minimo,
+                    maximo
+                )
+
+    return matriz
+
+
+def generar_poblacion(
+    self,
+    tamano_poblacion,
+    n=None
+):
+
+    if tamano_poblacion<=0:
+
+        raise ValueError(
+            "tamano_poblacion debe ser positivo"
+        )
+
+    if n is None:
+
+        n=len(
+            self.matriz_costos
+        )
+
+    return [
+
+        random.sample(
+            range(n),
+            n
+        )
+
+        for _ in range(
+            tamano_poblacion
+        )
+    ]
