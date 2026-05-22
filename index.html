@@ -169,9 +169,9 @@ capacidad = 50
 solucion_greedy, valor_greedy = mochila_greedy(valores, pesos, capacidad)
 
 # Backtracking
-solucion_optima, valor_optimo, peso_optimo = mochila_backtracking(
-    valores,
+valor_optimo, peso_optimo, seleccion_optima = mochila_backtracking(
     pesos,
+    valores,
     capacidad
 )
 
@@ -192,7 +192,7 @@ print("Solución:", solucion_greedy)
 print("Valor:", valor_greedy)
 
 print("\n=== BACKTRACKING ===")
-print("Solución:", solucion_optima)
+print("Solución:", seleccion_optima)
 print("Valor:", valor_optimo)
 print("Peso:", peso_optimo)
 
@@ -388,8 +388,7 @@ heuristicos-main/
 │   ├── test_knapsack.py
 │   └── test_viajero.py
 │
-├── examples/
-│   └── ejemplos_heuristicos.ipynb
+├── ejemplos_heuristicos.ipynb
 │
 ├── index.html
 ├── pyproject.toml
