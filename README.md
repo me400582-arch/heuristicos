@@ -1,319 +1,145 @@
-# Heurísticos
+# Heurísticos: Mochila 0/1 y Agente Viajero
 
-## Problemas de Optimización Combinatoria
+## Descripción general
 
-Paquete en Python que implementa algoritmos heurísticos y exactos para resolver problemas clásicos de optimización combinatoria.
+Este proyecto proporciona una biblioteca en Python que implementa
+algoritmos exactos y heurísticos para **dos** problemas clásicos de
+optimización combinatoria:
 
----
+- **Mochila 0/1** (0/1 knapsack) – se seleccionan elementos con peso y
+  valor para maximizar el beneficio sin superar una capacidad fija.
+- **Problema del agente viajero** (TSP) – se busca la ruta más corta
+  que visita todas las ciudades una sola vez y vuelve al punto de
+  partida.
 
-## Descripción
+El objetivo es comparar la eficiencia, complejidad y calidad de
+las soluciones de cada algoritmo. La rúbrica del proyecto exige
+que la documentación sea clara, con instrucciones de instalación y
+ejemplos de uso.
 
-Este proyecto desarrolla una biblioteca en Python orientada a la resolución de problemas clásicos de optimización combinatoria mediante distintos enfoques algorítmicos.
+## Algoritmos implementados
 
-El objetivo principal es comparar algoritmos exactos y heurísticos, analizando:
+La biblioteca incluye los siguientes métodos:
 
-- Eficiencia computacional
-- Complejidad algorítmica
-- Calidad de las soluciones obtenidas
-- Rendimiento en distintas instancias
+| Problema | Algoritmo | Descripción |
+|---------|-----------|-------------|
+| Mochila 0/1 | **Greedy** | Selecciona elementos ordenados por relación valor/peso hasta completar la capacidad. |
+| Mochila 0/1 | **Backtracking (Branch and Bound)** | Explora combinaciones posibles con poda basada en una cota superior para garantizar la mejor solución posible. |
+| Mochila 0/1 | **Recocido Simulado** | Metaheurística que explora soluciones vecinas aceptando empeoramientos probabilísticos para evitar óptimos locales. |
+| Agente Viajero | **Generación aleatoria de matrices y rutas** | Crea matrices de costos simétricas o asimétricas y genera rutas/poblaciones iniciales aleatorias. |
+| Agente Viajero | **Cálculo de costo** | Evalúa el costo total de recorrer una ruta cerrando el ciclo (vuelta a la ciudad inicial). |
+| Agente Viajero | **Búsqueda local 2‑OPT** | Intercambia segmentos de una ruta para eliminar cruces y reducir la distancia total. |
 
-Actualmente el proyecto incluye implementaciones para:
+Además, el módulo de la mochila define dos clases con
+`@dataclass`:
 
-- Problema de la Mochila 0/1
-- Problema del Agente Viajero (TSP)
+- `InstanciaMochila`: encapsula las listas de valores, pesos y la
+  capacidad de la mochila.
+- `SolucionMochila`: almacena la selección (vector binario o índices),
+  el valor total y el peso total de una solución.
 
----
+Estas clases facilitan el manejo de datos y cumplen con la indicación
+del profesor de utilizar dataclasses para estructurar las
+instancias.
 
-# Problema de la Mochila 0/1
-
-El problema de la mochila consiste en seleccionar objetos con un peso y un valor asociados para maximizar el beneficio total sin exceder una capacidad límite.
-
-Se denomina **0/1** porque cada objeto únicamente puede:
-
-- No seleccionarse (`0`)
-- Seleccionarse completamente (`1`)
-
-No es posible seleccionar fracciones de objetos.
-
----
-
-## Módulo Mochila 0/1
-
-Implementación de algoritmos heurísticos y exactos:
-
-- Greedy
-- Backtracking
-- Recocido Simulado
-
----
-
-# Problema del Agente Viajero (TSP)
-
-El Problema del Agente Viajero (*Traveling Salesman Problem*) consiste en encontrar la ruta más corta posible que permita visitar un conjunto de ciudades exactamente una vez y regresar al punto de origen.
-
-El objetivo es minimizar la distancia total recorrida o el costo total del recorrido.
-
----
-
-## Módulo Agente Viajero
-
-Implementación de algoritmos y operadores heurísticos:
-
-- Generación aleatoria de matrices de costos y rutas
-- Cálculo de costo de rutas
-- Búsqueda local 2-OPT
-
----
-
-# Instalación
-
-## Clonar el repositorio
-
-```bash
-git clone https://github.com/me400582-arch/heuristicos
-```
-
-## Entrar al proyecto
-
-```bash
-cd heuristicos
-```
-
-## Instalar el paquete
-
-```bash
-pip install .
-```
-
----
-
-# Estructura del Proyecto
-
-```bash
-heuristicos/
-│
+## Estructura del proyecto
+heuristicos-main/
 ├── heuristicos_pkg/
-│   ├── __init__.py
-│   ├── knapsack.py
-│   └── viajero.py
+│ ├── init.py # Permite importar el paquete como módulo
+│ ├── knapsack.py # Implementa los algoritmos de la mochila
+│ └── viajero.py # Implementa los algoritmos del TSP
 │
 ├── tests/
-│   ├── test_knapsack.py
-│   └── test_viajero.py
+│ ├── test_knapsack.py # Pruebas unitarias para la mochila
+│ └── test_viajero.py # Pruebas unitarias para el TSP
 │
-├── README.md
-├── pyproject.toml
-├── index.html
-└── .gitignore
-```
+├── Ejemplos_uso_Heuristicos (2).ipynb # Notebook con ejemplos de uso
+├── index.html # Página web de presentación del proyecto
+├── pyproject.toml # Archivo de configuración del paquete
+└── README.md # Este documento
 
----
+## Instalación local
 
-# Algoritmos Implementados
-
-## Greedy
-
-Selecciona objetos utilizando la mejor relación valor/peso.
-
-### Características
-
-- Algoritmo heurístico
-- Complejidad aproximada `O(n log n)`
-- Ejecución rápida
-- No garantiza solución óptima
-
----
-
-## Backtracking
-
-Explora todas las combinaciones posibles de objetos.
-
-### Características
-
-- Algoritmo exacto
-- Garantiza la solución óptima
-- Complejidad exponencial `O(2^n)`
-
----
-
-## Recocido Simulado
-
-Metaheurística inspirada en el proceso físico de enfriamiento de metales.
-
-### Características
-
-- Permite escapar de óptimos locales
-- Usa aceptación probabilística
-- Produce soluciones aproximadas eficientes
-- Adecuado para problemas complejos
-
----
-
-## Cruce Parcialmente Emparejado (PMX)
-
-Operador genético utilizado en problemas de permutaciones como el TSP.
-
-### Características
-
-- Preserva la validez de las permutaciones
-- Mantiene relaciones relativas entre ciudades
-- Garantiza una biyección completa
-- Complejidad aproximada `O(n²)`
-
----
-
-## Búsqueda Local 2-OPT
-
-Heurística de optimización local que mejora rutas eliminando cruces innecesarios.
-
-### Características
-
-- Técnica de búsqueda local
-- Mejora progresivamente las rutas
-- Complejidad temporal aproximada entre `O(n²)` y `O(n³)`
-- Puede ser costoso para instancias grandes
-
----
-
-## Algoritmo Genético para TSP
-
-Algoritmo evolutivo inspirado en los principios de selección natural.
-
-### Características
-
-- Usa operadores de cruce y mutación
-- Mantiene diversidad poblacional
-- Ayuda a evitar óptimos locales
-- Genera soluciones aproximadas eficientes
-- Adecuado para problemas de gran tamaño
-
----
-
-# Ejemplo de Uso
-
-## Mochila 0/1 con Greedy
-
-```python
-from heuristicos_pkg.knapsack import mochila_greedy
-
-valores = [60, 100, 120]
-pesos = [10, 20, 30]
-capacidad = 50
-
-seleccion, valor = mochila_greedy(
-    valores,
-    pesos,
-    capacidad
-)
-
-print("Objetos seleccionados:", seleccion)
-print("Valor total:", valor)
-```
-
----
-
-## Mochila 0/1 con Recocido Simulado
-
-```python
-from heuristicos_pkg.knapsack import mochila_recocido_simulado
-
-valores = [60, 100, 120]
-pesos = [10, 20, 30]
-capacidad = 50
-
-solucion, valor = mochila_recocido_simulado(
-    valores,
-    pesos,
-    capacidad
-)
-
-print("Solución:", solucion)
-print("Valor obtenido:", valor)
-```
-
----
-
-## Problema del Agente Viajero (TSP)
-
-```python
-from heuristicos_pkg.viajero import TSP
-
-M = [
-    [0, 10, 15, 20],
-    [10, 0, 35, 25],
-    [15, 35, 0, 30],
-    [20, 25, 30, 0]
-]
-
-tsp = TSP(M)
-
-ruta = tsp.generar_ruta()
-costo = tsp.calcular_costo(ruta)
-
-print(ruta)
-print(costo)
-```
-
----
-
-## Otra instancia de ejemplo
-
-```python
-valores = [60, 100, 120, 80, 200]
-pesos = [10, 20, 30, 15, 40]
-capacidad = 70
-```
-
-### Nota
-
-Las listas `valores` y `pesos` deben tener la misma longitud.
-
-Ejecutar las pruebas unitarias con:
+Para instalar la biblioteca en tu equipo o entorno virtual de
+Python, sigue estos pasos en la terminal. Cada línea está
+comentada para aclarar su función:
 
 ```bash
+# Descarga el repositorio desde GitHub (solo la primera vez)
+git clone https://github.com/me400582-arch/heuristicos.git
+
+# Entra en el directorio del proyecto recién clonado
+cd heuristicos
+
+# Instala el paquete en el entorno actual de Python (puede requerir privilegios de escritura)
+pip install .
+
+# Ejecuta las pruebas unitarias para comprobar que todo funciona correctamente
 pytest
-```
 
-Las pruebas verifican:
+# Clonamos el repositorio en la sesión de Colab.
+!git clone https://github.com/me400582-arch/heuristicos.git
 
-- Factibilidad de soluciones
-- Correctitud de algoritmos exactos
-- Consistencia de heurísticas
-- Validez de rutas y permutaciones
+# Entramos en la carpeta del repositorio para trabajar con el código.
+%cd heuristicos
 
----
+# Instalamos el paquete localmente en el entorno de Colab.
+!pip install .
 
-# Tecnologías Utilizadas
+# Importamos todas las funciones necesarias del módulo de la mochila.
+from heuristicos_pkg.knapsack import (
+    generar_instancia_mochila,
+    mochila_greedy,
+    mochila_recocido_simulado,
+    mochila_backtracking,
+)
 
-- Python
-- Pytest
-- GitHub
-- GitHub Pages
-- HTML
-- LaTeX
+# Generamos una instancia de la mochila con 50 objetos (valores y pesos aleatorios).
+valores, pesos, capacidad = generar_instancia_mochila(n_objetos=50)
 
----
+# Mostramos las listas de valores, pesos y la capacidad generada.
+print("Valores:", valores)
+print("Pesos:", pesos)
+print("Capacidad:", capacidad)
 
-# Objetivos Académicos
+# Resolución con el algoritmo greedy: devuelve la selección y el valor total.
+seleccion, valor = mochila_greedy(valores, pesos, capacidad)
+print("Selección (greedy):", seleccion)
+print("Valor total (greedy):", valor)
 
-Este proyecto fue desarrollado con fines educativos para:
+# Resolución con recocido simulado: encuentra una solución aproximada.
+seleccion, valor = mochila_recocido_simulado(valores, pesos, capacidad)
+print("Selección (recocido):", seleccion)
+print("Valor total (recocido):", valor)
 
-- Analizar técnicas heurísticas y exactas
-- Comparar complejidad computacional
-- Aplicar optimización combinatoria
-- Implementar algoritmos metaheurísticos
-- Utilizar buenas prácticas de programación
+# Resolución exacta con backtracking (branch and bound).
+valor_optimo, peso_optimo, seleccion_optima = mochila_backtracking(pesos, valores, capacidad)
+print("Valor óptimo (backtracking):", valor_optimo)
+print("Peso óptimo:", peso_optimo)
+print("Selección óptima:", seleccion_optima)
 
----
+# Importamos las funciones y la clase del TSP.
+from heuristicos_pkg.viajero import generar_matriz_aleatoria, TSP
 
-# Equipo de Trabajo
+# Generamos una matriz de costos simétrica para 20 ciudades.
+matriz = generar_matriz_aleatoria(20, simetrica=True)
+print("Matriz generada:", matriz)
 
-- Jose Rodolfo De la Cruz Flores
-- Marcela Mendoza Roque
-- Carlos Perusi Hernandez Cuellar
+# Creamos una instancia del problema con esa matriz.
+tsp = TSP(matriz)
 
----
+# Generamos una ruta inicial aleatoria.
+ruta = tsp.generar_ruta()
+print("Ruta inicial:", ruta)
 
-# Licencia
+# Calculamos el costo de la ruta inicial.
+costo = tsp.calcular_costo(ruta)
+print("Costo inicial:", costo)
 
-Proyecto académico desarrollado con fines educativos.
+# Mejora de la ruta mediante la heurística 2‑OPT.
+mejor_ruta, mejor_costo = tsp.dos_opt(ruta)
+print("Ruta mejorada:", mejor_ruta)
+print("Costo mejorado:", mejor_costo)
+
+# Finalmente, ejecutamos las pruebas unitarias para asegurarnos de que todo funciona.
+!pytest
