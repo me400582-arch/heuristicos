@@ -51,7 +51,7 @@ def generar_instancia_mochila(
     valor_min: int = 10,
     valor_max: int = 100,
     peso_min: int = 1,
-    peso_max: int = 30,
+    peso_max: int = 100,
     capacidad_ratio: float = 0.5,
 ) -> tuple[list[int], list[int], int]:
     """
