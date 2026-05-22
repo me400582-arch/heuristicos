@@ -41,7 +41,24 @@ def mochila_greedy(valores, pesos, capacidad):
     """
     Algoritmo greedy para el problema de la mochila.
     Ordena por valor/peso y selecciona mientras haya espacio.
+
+    Parámetros
+    ----------
+    valores : list[int]
+        Valores de los objetos.
+
+    pesos : list[int]
+        Pesos de los objetos.
+
+    capacidad : int
+        Capacidad máxima permitida.
+
+    Retorna
+    -------
+    tuple
+        Objetos seleccionados y valor total.
     """
+
     if len(valores) != len(pesos):
         raise ValueError(
             "valores y pesos deben tener el mismo tamaño"
@@ -56,6 +73,7 @@ def mochila_greedy(valores, pesos, capacidad):
         raise ValueError(
             "todos los pesos deben ser positivos"
         )
+
     n = len(valores)
 
     indices = list(range(n))
@@ -67,6 +85,7 @@ def mochila_greedy(valores, pesos, capacidad):
 
     total_valor = 0
     peso_actual = 0
+
     seleccion = []
 
     for i in indices:
