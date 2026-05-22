@@ -59,9 +59,9 @@ El objetivo es minimizar la distancia total recorrida o el costo total del recor
 
 Implementación de algoritmos y operadores heurísticos:
 
-- Cruce Parcialmente Emparejado (PMX)
-- Búsqueda Local 2-OPT
-- Algoritmo Genético para TSP
+- Generación aleatoria de matrices de costos y rutas
+- Cálculo de costo de rutas
+- Búsqueda local 2-OPT
 
 ---
 
@@ -247,7 +247,7 @@ M = [
 
 tsp = TSP(M)
 
-ruta = tsp.generar_ruta(4)
+ruta = tsp.generar_ruta()
 costo = tsp.calcular_costo(ruta)
 
 print(ruta)
