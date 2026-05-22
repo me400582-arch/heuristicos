@@ -300,7 +300,6 @@ solucion_rs, valor_rs = mochila_recocido_simulado(
 print("\n=== RECOCIDO SIMULADO ===")
 print("Solución:", solucion_rs)
 print("Valor:", valor_rs)
-print("Peso:", peso_optimo)
 ```
 
 ---
