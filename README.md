@@ -304,38 +304,41 @@ print("Valor:", valor_rs)
 ```
 
 ---
-
 # Ejemplo de uso — TSP
 
 ```python
 from heuristicos_pkg.viajero import (
     generar_matriz_aleatoria,
-    calcular_costo,
-    dos_opt,
+    TSP,
 )
 
 # Generar matriz de costos
 matriz = generar_matriz_aleatoria(5)
 
-print("Matriz:")
+print("Matriz de costos:")
+
 for fila in matriz:
     print(fila)
 
-# Ruta inicial
-ruta = [0, 1, 2, 3, 4]
+# Crear instancia del problema
+tsp = TSP(matriz)
 
-costo = calcular_costo(ruta, matriz)
+# Generar ruta aleatoria
+ruta = tsp.generar_ruta()
 
 print("\nRuta inicial:", ruta)
+
+# Calcular costo de la ruta
+costo = tsp.calcular_costo(ruta)
+
 print("Costo inicial:", costo)
 
-# Optimización 2-OPT
-nueva_ruta, nuevo_costo = dos_opt(ruta, matriz)
+# Optimización con 2-OPT
+nueva_ruta, nuevo_costo = tsp.dos_opt(ruta)
 
 print("\nRuta optimizada:", nueva_ruta)
 print("Nuevo costo:", nuevo_costo)
 ```
-
 ---
 
 # Pruebas unitarias
