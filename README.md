@@ -317,7 +317,7 @@ Este proyecto fue desarrollado con fines educativos para:
 
 - Jose Rodolfo De la Cruz Flores
 - Marcela Mendoza Roque
-- Carlos Perusi Hernandez Hernandez
+- Carlos Perusi Hernandez Cuellar
 
 ---
 
