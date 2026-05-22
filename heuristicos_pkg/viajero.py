@@ -4,6 +4,14 @@ class TSP:
     def __init__(self, matriz_costos):
         """Inicializa el problema con la matriz de distancias"""
         self.M = matriz_costos
+        if not matriz:
+    raise ValueError("la matriz no puede estar vacía")
+
+n = len(matriz)
+
+for fila in matriz:
+    if len(fila) != n:
+        raise ValueError("la matriz debe ser cuadrada")
 
     @staticmethod
     def generar_matriz_aleatoria(n, min_val=1, max_val=100, simetrica=True):
