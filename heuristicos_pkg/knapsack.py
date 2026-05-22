@@ -104,9 +104,27 @@ def mochila_greedy(valores, pesos, capacidad):
 
 def mochila_backtracking(pesos, valores, capacidad):
     """
-    Solución óptima usando backtracking.
+    Resuelve el problema de la mochila
+    utilizando backtracking.
+
+    Parámetros
+    ----------
+    pesos : list[int]
+        Pesos de los objetos.
+
+    valores : list[int]
+        Valores de los objetos.
+
+    capacidad : int
+        Capacidad máxima permitida.
+
+    Retorna
+    -------
+    tuple
+        Mejor valor, peso total y selección binaria.
     """
-      if len(valores) != len(pesos):
+
+    if len(valores) != len(pesos):
         raise ValueError(
             "valores y pesos deben tener el mismo tamaño"
         )
@@ -123,47 +141,58 @@ def mochila_backtracking(pesos, valores, capacidad):
 
     n = len(pesos)
 
-    best = [0, 0, []]
+    mejor_valor = 0
+    mejor_peso = 0
 
-    def bt(idx, current):
+    mejor_seleccion = [0] * n
 
-        if idx == n:
+    def backtrack(i, peso_actual,
+                   valor_actual, seleccion):
 
-            peso = sum(
-                pesos[i] * current[i]
-                for i in range(n)
-            )
+        nonlocal mejor_valor
+        nonlocal mejor_peso
+        nonlocal mejor_seleccion
 
-            valor = sum(
-                valores[i] * current[i]
-                for i in range(n)
-            )
+        if peso_actual > capacidad:
+            return
 
-            if peso <= capacidad and valor > best[0]:
+        if i == n:
 
-                best[0] = valor
-                best[1] = peso
-                best[2] = current[:]
+            if valor_actual > mejor_valor:
+
+                mejor_valor = valor_actual
+
+                mejor_peso = peso_actual
+
+                mejor_seleccion = seleccion[:]
 
             return
 
-        # elegir objeto
-        current.append(1)
+        seleccion[i] = 1
 
-        bt(idx + 1, current)
+        backtrack(
+            i + 1,
+            peso_actual + pesos[i],
+            valor_actual + valores[i],
+            seleccion
+        )
 
-        current.pop()
+        seleccion[i] = 0
 
-        # no elegir objeto
-        current.append(0)
+        backtrack(
+            i + 1,
+            peso_actual,
+            valor_actual,
+            seleccion
+        )
 
-        bt(idx + 1, current)
+    backtrack(0, 0, 0, [0] * n)
 
-        current.pop()
-
-    bt(0, [])
-
-    return best
+    return (
+        mejor_valor,
+        mejor_peso,
+        mejor_seleccion
+    )
 
 # RECOCIDO SIMULADO
 
