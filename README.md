@@ -278,7 +278,6 @@ seleccion, valor = mochila_greedy(valores, pesos, capacidad)
 print("\n=== GREEDY ===")
 print("Selección:", seleccion)
 print("Valor:", valor)
-print("Peso:", peso_optimo)
 
 # Backtracking
 valor_optimo, peso_optimo, seleccion_optima = mochila_backtracking(
