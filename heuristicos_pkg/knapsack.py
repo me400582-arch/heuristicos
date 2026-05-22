@@ -87,6 +87,20 @@ def mochila_backtracking(pesos, valores, capacidad):
     """
     Solución óptima usando backtracking.
     """
+      if len(valores) != len(pesos):
+        raise ValueError(
+            "valores y pesos deben tener el mismo tamaño"
+        )
+
+    if capacidad < 0:
+        raise ValueError(
+            "la capacidad no puede ser negativa"
+        )
+
+    if any(p <= 0 for p in pesos):
+        raise ValueError(
+            "todos los pesos deben ser positivos"
+        )
 
     n = len(pesos)
 
@@ -144,7 +158,20 @@ def mochila_recocido_simulado(valores,
     Algoritmo de recocido simulado
     para el problema de la mochila.
     """
+    if len(valores) != len(pesos):
+        raise ValueError(
+            "valores y pesos deben tener el mismo tamaño"
+        )
 
+    if capacidad < 0:
+        raise ValueError(
+            "la capacidad no puede ser negativa"
+        )
+
+    if any(p <= 0 for p in pesos):
+        raise ValueError(
+            "todos los pesos deben ser positivos"
+        )
     n = len(valores)
 
     # solución inicial
