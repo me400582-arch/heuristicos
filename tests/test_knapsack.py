@@ -1,9 +1,9 @@
-from heuristicos_pkg.knapsack import
-import pytest(
+import pytest
+from heuristicos_pkg.knapsack import (
     generar_instancia_mochila,
     mochila_greedy,
     mochila_backtracking,
-    mochila_recocido_simulado
+    mochila_recocido_simulado,
 )
 
 # TEST GENERADOR DE INSTANCIAS
