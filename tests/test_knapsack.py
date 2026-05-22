@@ -1,4 +1,5 @@
-from heuristicos_pkg.knapsack import (
+from heuristicos_pkg.knapsack import
+import pytest(
     generar_instancia_mochila,
     mochila_greedy,
     mochila_backtracking,
@@ -83,3 +84,34 @@ def test_mochila_recocido():
     assert peso_total <= capacidad
 
     assert valor > 0
+def test_capacidad_negativa():
+
+    with pytest.raises(ValueError):
+
+        mochila_greedy(
+            [1, 2],
+            [1, 2],
+            -1
+        )
+
+
+def test_pesos_invalidos():
+
+    with pytest.raises(ValueError):
+
+        mochila_greedy(
+            [1, 2],
+            [0, 2],
+            10
+        )
+
+
+def test_tamanos_distintos():
+
+    with pytest.raises(ValueError):
+
+        mochila_greedy(
+            [1],
+            [1, 2],
+            10
+        )
