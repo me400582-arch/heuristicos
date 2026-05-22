@@ -196,16 +196,23 @@ def mochila_backtracking(pesos, valores, capacidad):
 
 # RECOCIDO SIMULADO
 
-def mochila_recocido_simulado(valores,
-                               pesos,
-                               capacidad,
-                               T0=1000,
-                               alpha=0.999,
-                               iteraciones=5000):
+import random
+import math
+
+
+def mochila_recocido_simulado(
+    valores,
+    pesos,
+    capacidad,
+    temperatura=1000,
+    enfriamiento=0.95,
+    iteraciones=1000
+):
     """
-    Algoritmo de recocido simulado
-    para el problema de la mochila.
+    Resuelve el problema de la mochila
+    usando recocido simulado.
     """
+
     if len(valores) != len(pesos):
         raise ValueError(
             "valores y pesos deben tener el mismo tamaño"
@@ -220,85 +227,71 @@ def mochila_recocido_simulado(valores,
         raise ValueError(
             "todos los pesos deben ser positivos"
         )
+
     n = len(valores)
 
-    # solución inicial
-    X = [0] * n
+    solucion_actual = [0] * n
 
-    peso_actual = 0
-    valor_actual = 0
+    mejor_solucion = solucion_actual[:]
 
-    mejor_X = X[:]
-    mejor_valor = 0
+    def evaluar(solucion):
 
-    T = T0
+        peso = sum(
+            pesos[i]
+            for i in range(n)
+            if solucion[i]
+        )
 
-    for _ in range(iteraciones):
+        valor = sum(
+            valores[i]
+            for i in range(n)
+            if solucion[i]
+        )
 
-        # índice aleatorio
-        j = random.randint(0, n - 1)
+        if peso > capacidad:
+            return 0
 
-        Y = X[:]
+        return valor
 
-        # cambiar bit
-        Y[j] = 1 - Y[j]
+    valor_actual = evaluar(solucion_actual)
 
-        nuevo_peso = peso_actual
-        nuevo_valor = valor_actual
+    mejor_valor = valor_actual
 
-        # agregar objeto
-        if Y[j] == 1:
+    while temperatura > 1:
 
-            nuevo_peso += pesos[j]
+        for _ in range(iteraciones):
 
-            nuevo_valor += valores[j]
+            nueva_solucion = solucion_actual[:]
 
-        # quitar objeto
-        else:
+            i = random.randint(0, n - 1)
 
-            nuevo_peso -= pesos[j]
+            nueva_solucion[i] = 1 - nueva_solucion[i]
 
-            nuevo_valor -= valores[j]
+            nuevo_valor = evaluar(nueva_solucion)
 
-        # verificar factibilidad
-        if nuevo_peso <= capacidad:
+            diferencia = nuevo_valor - valor_actual
 
-            delta = nuevo_valor - valor_actual
+            if (
+                diferencia > 0
+                or random.random() <
+                math.exp(
+                    diferencia / temperatura
+                )
+            ):
 
-            # mejora
-            if delta > 0:
-
-                X = Y
-
-                peso_actual = nuevo_peso
+                solucion_actual = nueva_solucion
 
                 valor_actual = nuevo_valor
 
-            # aceptar peor solución
-            else:
+                if valor_actual > mejor_valor:
 
-                prob = math.exp(delta / T)
+                    mejor_solucion = solucion_actual[:]
 
-                if random.random() < prob:
+                    mejor_valor = valor_actual
 
-                    X = Y
+        temperatura *= enfriamiento
 
-                    peso_actual = nuevo_peso
-
-                    valor_actual = nuevo_valor
-
-            # actualizar mejor solución
-            if valor_actual > mejor_valor:
-
-                mejor_valor = valor_actual
-
-                mejor_X = X[:]
-
-        # enfriamiento
-        T *= alpha
-
-    return mejor_X, mejor_valor
-
+    return mejor_solucion, mejor_valor
 # EJEMPLO DE USO
 
 if __name__ == "__main__":
