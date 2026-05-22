@@ -1,148 +1,400 @@
-# Heurísticos: Mochila 0/1 y Agente Viajero
+# Heurísticos: Mochila 0/1 y Agente Viajero
 
 ## Descripción general
 
-Este proyecto proporciona una biblioteca en Python que implementa
-algoritmos exactos y heurísticos para **dos** problemas clásicos de
-optimización combinatoria:
+Este proyecto implementa una biblioteca en Python orientada a la resolución de problemas clásicos de optimización combinatoria mediante algoritmos exactos y heurísticos.
 
-- **Mochila 0/1** (0/1 knapsack) – se seleccionan elementos con peso y
-  valor para maximizar el beneficio sin superar una capacidad fija.
-- **Problema del agente viajero** (TSP) – se busca la ruta más corta
-  que visita todas las ciudades una sola vez y vuelve al punto de
-  partida.
+Los problemas abordados son:
 
-El objetivo es comparar la eficiencia, complejidad y calidad de
-las soluciones de cada algoritmo. La rúbrica del proyecto exige
-que la documentación sea clara, con instrucciones de instalación y
-ejemplos de uso.
+- **Problema de la Mochila 0/1 (Knapsack Problem)**
+- **Problema del Agente Viajero (Travelling Salesman Problem - TSP)**
 
-## Algoritmos implementados
+El objetivo principal es comparar diferentes estrategias de solución, analizando:
 
-La biblioteca incluye los siguientes métodos:
+- Calidad de las soluciones
+- Complejidad computacional
+- Eficiencia de ejecución
+- Diferencias entre algoritmos exactos y heurísticos
 
-| Problema | Algoritmo | Descripción |
-|---------|-----------|-------------|
-| Mochila 0/1 | **Greedy** | Selecciona elementos ordenados por relación valor/peso hasta completar la capacidad. |
-| Mochila 0/1 | **Backtracking (Branch and Bound)** | Explora combinaciones posibles con poda basada en una cota superior para garantizar la mejor solución posible. |
-| Mochila 0/1 | **Recocido Simulado** | Metaheurística que explora soluciones vecinas aceptando empeoramientos probabilísticos para evitar óptimos locales. |
-| Agente Viajero | **Generación aleatoria de matrices y rutas** | Crea matrices de costos simétricas o asimétricas y genera rutas/poblaciones iniciales aleatorias. |
-| Agente Viajero | **Cálculo de costo** | Evalúa el costo total de recorrer una ruta cerrando el ciclo (vuelta a la ciudad inicial). |
-| Agente Viajero | **Búsqueda local 2‑OPT** | Intercambia segmentos de una ruta para eliminar cruces y reducir la distancia total. |
+La biblioteca fue desarrollada utilizando buenas prácticas de programación en Python:
 
-Además, el módulo de la mochila define dos clases con
-`@dataclass`:
+- Modularización
+- Uso de `dataclasses`
+- Documentación
+- Pruebas unitarias con `pytest`
+- Notebook de ejemplos de uso
 
-- `InstanciaMochila`: encapsula las listas de valores, pesos y la
-  capacidad de la mochila.
-- `SolucionMochila`: almacena la selección (vector binario o índices),
-  el valor total y el peso total de una solución.
+---
 
-Estas clases facilitan el manejo de datos y cumplen con la indicación
-del profesor de utilizar dataclasses para estructurar las
-instancias.
+# Problema de la Mochila 0/1
 
-## Estructura del proyecto
+El problema de la mochila consiste en seleccionar objetos con:
+
+- un peso
+- un valor o beneficio
+
+de forma que:
+
+- el peso total no exceda la capacidad máxima
+- el valor total sea máximo
+
+Este problema pertenece a la clase de problemas NP-Completo y es ampliamente utilizado en:
+
+- logística
+- optimización de recursos
+- finanzas
+- inteligencia artificial
+
+---
+
+# Algoritmos implementados para Mochila
+
+## Greedy
+
+El algoritmo greedy selecciona objetos utilizando la relación:
+
+\[
+\frac{valor}{peso}
+\]
+
+Los elementos se ordenan de mayor a menor según dicha razón y se agregan mientras exista capacidad disponible.
+
+### Ventajas
+
+- Muy rápido
+- Fácil de implementar
+
+### Desventajas
+
+- No garantiza solución óptima
+
+---
+
+## Backtracking con Branch and Bound
+
+Este método explora combinaciones posibles de objetos utilizando poda inteligente.
+
+Se calcula una cota superior para evitar explorar ramas que no pueden mejorar la mejor solución encontrada.
+
+### Características
+
+- Algoritmo exacto
+- Garantiza solución óptima
+- Mayor costo computacional
+
+---
+
+## Recocido Simulado
+
+Metaheurística inspirada en procesos físicos de enfriamiento de materiales.
+
+Permite aceptar temporalmente soluciones peores con cierta probabilidad para evitar óptimos locales.
+
+### Características
+
+- Aproximación heurística
+- Buena exploración del espacio de búsqueda
+- No garantiza óptimo global
+
+---
+
+# Problema del Agente Viajero (TSP)
+
+El TSP consiste en encontrar la ruta de menor costo que:
+
+- visite todas las ciudades exactamente una vez
+- regrese al punto inicial
+
+Es uno de los problemas más importantes de optimización combinatoria y tiene aplicaciones en:
+
+- rutas de transporte
+- logística
+- redes
+- manufactura
+- robótica
+
+---
+
+# Algoritmos implementados para TSP
+
+## Generación de matrices aleatorias
+
+Se implementa la creación de matrices de costos:
+
+- simétricas
+- asimétricas
+
+para construir instancias aleatorias del problema.
+
+---
+
+## Generación de rutas y poblaciones
+
+El sistema genera rutas aleatorias válidas utilizando permutaciones de ciudades.
+
+También se generan poblaciones de rutas para posibles algoritmos evolutivos futuros.
+
+---
+
+## Cálculo de costo
+
+Se calcula el costo total de una ruta cerrando el ciclo:
+
+\[
+c_{total} = \sum c_{ij}
+\]
+
+incluyendo el regreso a la ciudad inicial.
+
+---
+
+## Heurística 2-OPT
+
+El algoritmo 2-OPT mejora rutas intercambiando segmentos para eliminar cruces innecesarios.
+
+### Funcionamiento
+
+- Selecciona dos aristas
+- Invierte un segmento de la ruta
+- Conserva el cambio si mejora el costo total
+
+### Ventajas
+
+- Reduce considerablemente la distancia
+- Implementación relativamente sencilla
+- Mejora óptimos locales
+
+---
+
+# Uso de Dataclasses
+
+El módulo de mochila implementa las siguientes clases:
+
+## InstanciaMochila
+
+Representa una instancia del problema:
+
+```python
+@dataclass
+class InstanciaMochila:
+    valores: list[int]
+    pesos: list[int]
+    capacidad: int
+```
+
+---
+
+## SolucionMochila
+
+Representa una solución obtenida:
+
+```python
+@dataclass
+class SolucionMochila:
+    seleccion: list[int]
+    valor: int
+    peso: int
+```
+
+El uso de `dataclass` permite:
+
+- código más limpio
+- mejor organización
+- facilidad de mantenimiento
+- mejor representación de datos
+
+---
+
+# Estructura del proyecto
 
 ```text
 heuristicos-main/
+│
 ├── heuristicos_pkg/
-│   ├── __init__.py              # Permite importar el paquete como módulo
-│   ├── knapsack.py              # Implementa los algoritmos de la mochila
-│   └── viajero.py               # Implementa los algoritmos del TSP
+│   ├── __init__.py
+│   ├── knapsack.py
+│   └── viajero.py
 │
 ├── tests/
-│   ├── test_knapsack.py         # Pruebas unitarias para la mochila
-│   └── test_viajero.py          # Pruebas unitarias para el TSP
+│   ├── test_knapsack.py
+│   └── test_viajero.py
 │
-├── Ejemplos_uso_Heuristicos (2).ipynb   # Notebook con ejemplos de uso
-├── index.html                           # Página web de presentación del proyecto
-├── pyproject.toml                       # Archivo de configuración del paquete
-└── README.md                            # Este documento
+├── examples/
+│   └── ejemplos_heuristicos.ipynb
+│
+├── pyproject.toml
+├── README.md
+└── index.html
 ```
 
-## Instalación local
+---
 
-Para instalar la biblioteca en tu equipo o entorno virtual de
-Python, sigue estos pasos en la terminal. Cada línea está
-comentada para aclarar su función:
+# Instalación
+
+## Clonar el repositorio
 
 ```bash
-# Descarga el repositorio desde GitHub (solo la primera vez)
-git clone https://github.com/me400582-arch/heuristicos.git
+git clone https://github.com/TU_USUARIO/TU_REPOSITORIO.git
+```
 
-# Entra en el directorio del proyecto recién clonado
-cd heuristicos
+---
 
-# Instala el paquete en el entorno actual de Python (puede requerir privilegios de escritura)
+## Entrar al proyecto
+
+```bash
+cd TU_REPOSITORIO
+```
+
+---
+
+## Instalar el paquete
+
+```bash
 pip install .
+```
 
-# Ejecuta las pruebas unitarias para comprobar que todo funciona correctamente
-pytest
+---
 
-# Clonamos el repositorio en la sesión de Colab.
-!git clone https://github.com/me400582-arch/heuristicos.git
+# Ejemplo de uso — Mochila
 
-# Entramos en la carpeta del repositorio para trabajar con el código.
-%cd heuristicos
-
-# Instalamos el paquete localmente en el entorno de Colab.
-!pip install .
-
-# Importamos todas las funciones necesarias del módulo de la mochila.
+```python
 from heuristicos_pkg.knapsack import (
     generar_instancia_mochila,
     mochila_greedy,
-    mochila_recocido_simulado,
     mochila_backtracking,
+    mochila_recocido_simulado,
 )
 
-# Generamos una instancia de la mochila con 50 objetos (valores y pesos aleatorios).
-valores, pesos, capacidad = generar_instancia_mochila(n_objetos=50)
+# Generar instancia aleatoria
+valores, pesos, capacidad = generar_instancia_mochila(n_objetos=5)
 
-# Mostramos las listas de valores, pesos y la capacidad generada.
 print("Valores:", valores)
 print("Pesos:", pesos)
 print("Capacidad:", capacidad)
 
-# Resolución con el algoritmo greedy: devuelve la selección y el valor total.
+# Greedy
 seleccion, valor = mochila_greedy(valores, pesos, capacidad)
-print("Selección (greedy):", seleccion)
-print("Valor total (greedy):", valor)
 
-# Resolución con recocido simulado: encuentra una solución aproximada.
-seleccion, valor = mochila_recocido_simulado(valores, pesos, capacidad)
-print("Selección (recocido):", seleccion)
-print("Valor total (recocido):", valor)
+print("\n=== GREEDY ===")
+print("Selección:", seleccion)
+print("Valor:", valor)
 
-# Resolución exacta con backtracking (branch and bound).
-valor_optimo, peso_optimo, seleccion_optima = mochila_backtracking(pesos, valores, capacidad)
-print("Valor óptimo (backtracking):", valor_optimo)
-print("Peso óptimo:", peso_optimo)
-print("Selección óptima:", seleccion_optima)
+# Backtracking
+valor_optimo, peso_optimo, seleccion_optima = mochila_backtracking(
+    pesos,
+    valores,
+    capacidad
+)
 
-# Importamos las funciones y la clase del TSP.
-from heuristicos_pkg.viajero import generar_matriz_aleatoria, TSP
+print("\n=== BACKTRACKING ===")
+print("Valor óptimo:", valor_optimo)
+print("Peso:", peso_optimo)
+print("Selección:", seleccion_optima)
 
-# Generamos una matriz de costos simétrica para 20 ciudades.
-matriz = generar_matriz_aleatoria(20, simetrica=True)
-print("Matriz generada:", matriz)
+# Recocido Simulado
+solucion_rs, valor_rs = mochila_recocido_simulado(
+    valores,
+    pesos,
+    capacidad
+)
 
-# Creamos una instancia del problema con esa matriz.
-tsp = TSP(matriz)
+print("\n=== RECOCIDO SIMULADO ===")
+print("Solución:", solucion_rs)
+print("Valor:", valor_rs)
+```
 
-# Generamos una ruta inicial aleatoria.
-ruta = tsp.generar_ruta()
-print("Ruta inicial:", ruta)
+---
 
-# Calculamos el costo de la ruta inicial.
-costo = tsp.calcular_costo(ruta)
+# Ejemplo de uso — TSP
+
+```python
+from heuristicos_pkg.viajero import (
+    generar_matriz_aleatoria,
+    calcular_costo,
+    dos_opt,
+)
+
+# Generar matriz de costos
+matriz = generar_matriz_aleatoria(5)
+
+print("Matriz:")
+for fila in matriz:
+    print(fila)
+
+# Ruta inicial
+ruta = [0, 1, 2, 3, 4]
+
+costo = calcular_costo(ruta, matriz)
+
+print("\nRuta inicial:", ruta)
 print("Costo inicial:", costo)
 
-# Mejora de la ruta mediante la heurística 2‑OPT.
-mejor_ruta, mejor_costo = tsp.dos_opt(ruta)
-print("Ruta mejorada:", mejor_ruta)
-print("Costo mejorado:", mejor_costo)
+# Optimización 2-OPT
+nueva_ruta, nuevo_costo = dos_opt(ruta, matriz)
 
-# Finalmente, ejecutamos las pruebas unitarias para asegurarnos de que todo funciona.
-!pytest
+print("\nRuta optimizada:", nueva_ruta)
+print("Nuevo costo:", nuevo_costo)
+```
+
+---
+
+# Pruebas unitarias
+
+El proyecto incluye pruebas unitarias utilizando `pytest`.
+
+Para ejecutarlas:
+
+```bash
+pytest
+```
+
+Las pruebas verifican:
+
+- validación de entradas
+- generación de instancias
+- cálculo correcto de soluciones
+- funcionamiento de heurísticas
+- optimización de rutas
+
+---
+
+# Libreta de ejemplos
+
+El proyecto incluye una libreta de Jupyter con ejemplos completos de uso:
+
+```text
+examples/ejemplos_heuristicos.ipynb
+```
+
+La libreta contiene:
+
+- ejemplos ejecutables
+- explicación de algoritmos
+- demostraciones prácticas
+- pruebas de funcionamiento
+
+---
+
+# Tecnologías utilizadas
+
+- Python 3
+- Pytest
+- Google Colab
+- GitHub
+- Jupyter Notebook
+
+---
+
+# Equipo de trabajo
+
+- Jose Rodolfo De la Cruz Flores
+- Carlos Perusi Hernandez Cuellar
+- Marcela Mendoza Roque
+
+---
+
+# Licencia
+
+Este proyecto fue desarrollado con fines académicos y educativos.
+
+Licencia MIT.
