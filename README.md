@@ -288,9 +288,9 @@ valor_optimo, peso_optimo, seleccion_optima = mochila_backtracking(
 )
 
 print("\n=== BACKTRACKING ===")
+print("Selección:", seleccion_optima)
 print("Valor óptimo:", valor_optimo)
 print("Peso:", peso_optimo)
-print("Selección:", seleccion_optima)
 
 # Recocido Simulado
 solucion_rs, valor_rs = mochila_recocido_simulado(
