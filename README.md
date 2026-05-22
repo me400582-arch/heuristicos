@@ -236,10 +236,7 @@ print("Valor obtenido:", valor)
 ## Problema del Agente Viajero (TSP)
 
 ```python
-from heuristicos_pkg.viajero import (
-    generar_poblacion,
-    calcular_costo
-)
+from heuristicos_pkg.viajero import TSP
 
 M = [
     [0, 10, 15, 20],
@@ -248,17 +245,13 @@ M = [
     [20, 25, 30, 0]
 ]
 
-poblacion = generar_poblacion(
-    tamano_poblacion=5,
-    n=4,
-    M=M
-)
+tsp = TSP(M)
 
-for ruta in poblacion:
-    costo = calcular_costo(ruta, M)
+ruta = tsp.generar_ruta(4)
+costo = tsp.calcular_costo(ruta)
 
-    print("Ruta:", ruta)
-    print("Costo:", costo)
+print(ruta)
+print(costo)
 ```
 
 ---
